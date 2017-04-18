@@ -22,12 +22,14 @@
         <div id="AuthDoc" visible="false" runat="server">
             <p>Upload authorizations detail file here:</p>
             <asp:FileUpload ID="AuthUpload1" runat="server" />
-            <asp:Button ID="btnAuthUpload" runat="server" Text="Upload" OnClick="btnAuthUpload_Click" />
+            <asp:Button ID="btnAuthUpload" runat="server" Text="Upload File" OnClick="btnAuthUpload_Click" />
+            <asp:Button ID="btnAuthClear" runat="server" Text="Delete File" OnClick="btnAuthClear_Click" Visible="false" />
         </div>
         <div id="BillDoc" visible="false" runat="server">
             <p>Upload billing/collections detail file here:</p>
             <asp:FileUpload ID="BillUpload1" runat="server" />
-            <asp:Button ID="btnBillUpload" runat="server" Text="Upload" OnClick="btnBillUpload_Click" />
+            <asp:Button ID="btnBillUpload" runat="server" Text="Upload File" OnClick="btnBillUpload_Click" />
+            <asp:Button ID="btnBillClear" runat="server" Text="Delete File" OnClick="btnBillClear_Click" Visible="false" />
         </div>
         <asp:GridView 
             ID="GridView1" 

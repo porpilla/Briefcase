@@ -39,5 +39,15 @@ namespace AOBriefcase
             Guid.TryParse(Request.QueryString["GUID"], out btnViewGuid);
             Response.Redirect("~/PlaceholderPage.aspx?guid=" + btnViewGuid);
         }
+
+        protected void fetchDLinfo()
+        {
+            Guid targetGuid = Guid.Empty;
+            Guid.TryParse(Request.QueryString["GUID"], out targetGuid);
+            string targetfile = Request.QueryString["Contract_PDF"];
+
+            
+        }
+
     }
 }

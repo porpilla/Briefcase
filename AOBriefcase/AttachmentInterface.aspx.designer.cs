@@ -49,6 +49,15 @@ namespace AOBriefcase {
         protected global::System.Web.UI.WebControls.Button btnAuthUpload;
         
         /// <summary>
+        /// btnAuthClear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAuthClear;
+        
+        /// <summary>
         /// BillDoc control.
         /// </summary>
         /// <remarks>
@@ -74,6 +83,15 @@ namespace AOBriefcase {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnBillUpload;
+        
+        /// <summary>
+        /// btnBillClear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBillClear;
         
         /// <summary>
         /// GridView1 control.

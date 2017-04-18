@@ -71,7 +71,7 @@
                 <asp:CheckBoxField DataField="SVC_Podiatry" HeaderText="SVC_Podiatry" SortExpression="SVC_Podiatry" />
                 <asp:CheckBoxField DataField="SVC_Injections" HeaderText="SVC_Injections" SortExpression="SVC_Injections" />
                 <asp:BoundField DataField="SVC_Injectibles" HeaderText="SVC_Injectibles" SortExpression="SVC_Injectibles" />--%>
-                <asp:BoundField DataField="Auth_ProviderPortal" HeaderText="Provider Portal" SortExpression="Auth_ProviderPortal"/>
+                <asp:HyperLinkField DataNavigateUrlFields="Auth_ProviderPortal" DataNavigateUrlFormatString="http://{0}" HeaderText="Provider Portal" Text="Visit Provider Portal" SortExpression="Auth_ProviderPortal"/>
                 <asp:BoundField DataField="Auth_OfficeVisits" HeaderText="Office Visit Authorizations" SortExpression="Auth_OfficeVisits"/>                
                 <asp:BoundField DataField="Auth_OfficeVisits_Note" HeaderText="Additional Details" SortExpression="Auth_OfficeVisits_Note"/>
                 <asp:BoundField DataField="Auth_SX" HeaderText="Surgery Authorizations" SortExpression="Auth_SX"/>
@@ -90,8 +90,8 @@
                 <asp:BoundField DataField="Auth_Podiatry_Note" HeaderText="Additional Details" SortExpression="Auth_Podiatry_Note"/>
                 <asp:BoundField DataField="Auth_Injections" HeaderText="Injection Authorizations" SortExpression="Auth_Injections"/>
                 <asp:BoundField DataField="Auth_Injections_Note" HeaderText="Additional Details" SortExpression="Auth_Injections_Note"/>
-                <%--<asp:BoundField DataField="Contract_PDF" HeaderText="Contract_PDF" SortExpression="Contract_PDF" />
-                <asp:BoundField DataField="GUID" HeaderText="GUID" SortExpression="GUID" />--%>
+                <asp:HyperLinkField DataNavigateUrlFields="GUID, Contract_PDF" DataNavigateUrlFormatString="downloads.aspx?guid={0}&file={1}" HeaderText="Authorizations Detail File" Text="Download" SortExpression="Contract_PDF"/>
+                <%--<asp:BoundField DataField="GUID" HeaderText="GUID" SortExpression="GUID" />--%>
             </Fields>
         </asp:DetailsView>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DemographicsConnectionString %>" SelectCommand="SELECT * FROM [Contract_Demographics] WHERE ([GUID] = @guide)">

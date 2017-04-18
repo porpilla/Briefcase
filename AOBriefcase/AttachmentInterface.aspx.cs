@@ -15,7 +15,7 @@ namespace AOBriefcase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-                        
+
         }
 
         protected void btnAuthUpload_Click(object sender, EventArgs e)
@@ -23,11 +23,18 @@ namespace AOBriefcase
             if (AuthUpload1.HasFile)
             {
                 string fileName = Path.GetFileName(AuthUpload1.PostedFile.FileName);
-                string AuthMapPath = "~/App_Data/Attachments/Authorizations/";                
+                string AuthMapPath = "~/App_Data/Attachments/Authorizations/";
                 AuthUpload1.PostedFile.SaveAs(Server.MapPath(AuthMapPath) + fileName);
-                InsertAuthFilepath(fileName);                
+                InsertAuthFilepath(fileName);
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
+        }
+
+        protected void btnAuthClear_Click(object sender, EventArgs e)
+        {
+            DeleteAuthFile();
+            ClearAuthDBEntry();
+            Response.Redirect(Request.Url.AbsoluteUri);
         }
 
         protected void btnBillUpload_Click(object sender, EventArgs e)
@@ -42,12 +49,130 @@ namespace AOBriefcase
             }
         }
 
+        protected void btnBillClear_Click(object sender, EventArgs e)
+        {
+            DeleteBillFile();
+            ClearBillDBEntry();
+            Response.Redirect(Request.Url.AbsoluteUri);
+        }
+
         protected void IndexSelected(object sender, EventArgs e)
         {
             AuthDoc.Visible = true;
             BillDoc.Visible = true;
+
+            if (VerifyExistingAuthFile() != null)
+            {
+                btnAuthClear.Visible = true;
+                btnAuthUpload.Visible = false;
+            }
+            else
+            {
+                btnAuthClear.Visible = false;
+                btnAuthUpload.Visible = true;
+            }
+            if (VerifyExistingBillFile() != null)
+            {
+                btnBillClear.Visible = true;
+                btnBillUpload.Visible = false;
+            }
+            else
+            {
+                btnBillClear.Visible = false;
+                btnBillUpload.Visible = true;
+            }
         }
-               
+
+        // In order for file deletion methods to work, NETWORK SERVICES user must be enabled on /Attachments directory
+        protected void DeleteAuthFile()
+        {
+            var AuthFileName = VerifyExistingAuthFile();
+            var AuthFilePath = Server.MapPath("~/App_Data/Attachments/Authorizations/") + AuthFileName;
+            File.Delete(AuthFilePath);
+        }
+
+        protected void DeleteBillFile()
+        {
+            var BillFileName = VerifyExistingBillFile();
+            var BillFilePath = Server.MapPath("~/App_Data/Attachments/Billing/") + BillFileName;
+            File.Delete(BillFilePath);
+        }
+
+
+        protected string VerifyExistingAuthFile()
+        {
+            string AuthFileName = "debug";
+            SqlConnection sqlcon = new SqlConnection(GetConnection());
+            try
+            {
+                sqlcon.Open();
+                SqlCommand cmd = new SqlCommand("SELECT [Contract_PDF] FROM [Contract_Demographics] WHERE [ContractID]=@SelectedIndex", sqlcon);
+                SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.Int);
+                ChosenIndex.Value = GridView1.SelectedIndex + 1;
+                cmd.Parameters.Add(ChosenIndex);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        if (!reader.IsDBNull(reader.GetOrdinal("Contract_PDF")))
+                        {
+                            AuthFileName = reader.GetString(reader.GetOrdinal("Contract_PDF"));
+                        }
+                        else
+                        {
+                            AuthFileName = null;
+                        }
+                    }
+                    return AuthFileName;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                sqlcon.Close();
+            }
+        }
+
+        protected string VerifyExistingBillFile()
+        {
+            string BillFileName = "debug";
+            SqlConnection sqlcon = new SqlConnection(GetConnection());
+            try
+            {
+                sqlcon.Open();
+                SqlCommand cmd = new SqlCommand("SELECT [Billing_PDF] FROM [Contract_Demographics] WHERE [ContractID]=@SelectedIndex", sqlcon);
+                SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.Int);
+                ChosenIndex.Value = GridView1.SelectedIndex + 1;
+                cmd.Parameters.Add(ChosenIndex);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        if (!reader.IsDBNull(reader.GetOrdinal("Billing_PDF")))
+                        {
+                            BillFileName = reader.GetString(reader.GetOrdinal("Billing_PDF"));
+                        }
+                        else
+                        {
+                            BillFileName = null;
+                        }
+                    }
+                    return BillFileName;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+            finally
+            {
+                sqlcon.Close();
+            }
+        }
+
 
         private void InsertAuthFilepath(string filepath)
         {
@@ -60,12 +185,12 @@ namespace AOBriefcase
                 SqlParameter param = new SqlParameter("@filepath", SqlDbType.VarChar);
                 SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.Int);
                 param.Value = filepath;
-                ChosenIndex.Value = GridView1.SelectedIndex + 1;                
+                ChosenIndex.Value = GridView1.SelectedIndex + 1;
                 cmd.Parameters.Add(ChosenIndex);
                 cmd.Parameters.Add(param);
                 cmd.ExecuteNonQuery();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string msg = "Error when inserting filepath";
                 msg += ex.Message;
@@ -105,6 +230,65 @@ namespace AOBriefcase
             }
         }
 
+        private void ClearAuthDBEntry()
+        {
+            SqlConnection sqlcon = new SqlConnection(GetConnection());
+            try
+            {
+                sqlcon.Open();
+                SqlCommand cmd = new SqlCommand("spUpdateAuthFilePath", sqlcon);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlParameter param = new SqlParameter("@filepath", SqlDbType.VarChar);
+                param.IsNullable = true;
+                SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.Int);
+                param.Value = DBNull.Value;
+                ChosenIndex.Value = GridView1.SelectedIndex + 1;
+                cmd.Parameters.Add(ChosenIndex);
+                cmd.Parameters.Add(param);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                string msg = "Error when removing filepath";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+            finally
+            {
+                sqlcon.Close();
+            }
+        }
+
+        protected void ClearBillDBEntry()
+        {
+            SqlConnection sqlcon = new SqlConnection(GetConnection());
+            try
+            {
+                sqlcon.Open();
+                SqlCommand cmd = new SqlCommand("spUpdateBillFilePath", sqlcon);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlParameter param = new SqlParameter("@filepath", SqlDbType.VarChar);
+                param.IsNullable = true;
+                SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.Int);
+                param.Value = DBNull.Value;
+                ChosenIndex.Value = GridView1.SelectedIndex + 1;
+                cmd.Parameters.Add(ChosenIndex);
+                cmd.Parameters.Add(param);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                string msg = "Error when removing filepath";
+                msg += ex.Message;
+                throw new Exception(msg);
+            }
+            finally
+            {
+                sqlcon.Close();
+            }
+        }
+
+
         private string GetConnection()
         {
             return System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -112,5 +296,5 @@ namespace AOBriefcase
 
     }
 
-    
+
 }

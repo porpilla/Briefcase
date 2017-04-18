@@ -103,6 +103,7 @@
     <Content Include="DBEdit.css" />
     <Content Include="disclaimer.aspx" />
     <Content Include="disclaimer.css" />
+    <Content Include="downloads.aspx" />
     <Content Include="Images\buttonBlue.png" />
     <Content Include="Images\buttonOrange.png" />
     <Content Include="Images\favicon.ico" />
@@ -186,6 +187,13 @@
     <Compile Include="disclaimer.aspx.designer.cs">
       <DependentUpon>disclaimer.aspx</DependentUpon>
     </Compile>
+    <Compile Include="downloads.aspx.cs">
+      <DependentUpon>downloads.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="downloads.aspx.designer.cs">
+      <DependentUpon>downloads.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PathResolution.aspx.cs">
       <DependentUpon>PathResolution.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -251,7 +259,10 @@
       <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\Attachments\Authorizations\" />
+    <Folder Include="App_Data\Attachments\Billing\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
