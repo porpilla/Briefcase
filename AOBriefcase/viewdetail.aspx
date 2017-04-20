@@ -1,51 +1,18 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="viewdetail.aspx.cs" Inherits="AOBriefcase.viewdetail" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="viewdetail.aspx.cs" Inherits="AOBriefcase.viewdetail" %>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Contract Detail Viewer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    
-    <link rel="shortcut icon" type="image/x-icon" href="~/Images/favicon.ico" runat="server"/>
-    <link rel="icon" type="image/ico" href="~/Images/favicon.ico" runat="server"/>
+<asp:Content ID="stuff_1" ContentPlaceHolderID="head" runat="server">
+    <title>Contract Detail Viewer</title>    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="viewdetail.css" type="text/css" />
-    
-<style type="text/css" media="screen">
-    @import "viewdetail.css";
-    /*body {
-    font-family:Arial, Helvetica, sans-serif;    
-    }
+</asp:Content>   
 
-h2{
-    color:#2b4b83;    
-    }
 
-div{
-    font-family:Arial, Helvetica, sans-serif;
-    }
-dl{
-    width:300px;
-    margin:0;
-    }
-dl dt{
-    float:left;
-    width:400px;
-    text-decoration: underline;
-    }
-dl dt dd{
-    float:left;
-    width:200px;
-    font-weight: bold;
-    text-decoration:underline;
-    }*/
-</style>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <asp:Image ID="AOLogo" runat="server" ImageURL="~/Images/AOlogo.png"/>
+<%--<body>--%>
+    <%--<form id="form1" runat="server">--%>
+        <%--<asp:Image ID="AOLogo" runat="server" ImageURL="~/Images/AOlogo.png"/>--%>
 
-        <div id="NavigationBar">
+        <%--<div id="NavigationBar">
             <h2 id="CRD"><span style="color:#79b9ef">C</span>ontract <span style="color:#79b9ef">R</span>eference <span style="color:#79b9ef">D</span>atabase</h2>      
             <asp:Menu 
                 ID="Navi" 
@@ -60,42 +27,36 @@ dl dt dd{
                     <asp:MenuItem NavigateUrl="~/Contacts.aspx" Text="Contact" />
                 </Items>
             </asp:Menu>
-        </div>
-
-        <br />
-        <br />
+        </div>--%>
+        
+<asp:Content ID="submenuview" ContentPlaceHolderID="submenu" runat="server">
         <div id="subNavigationBar">
-            <h2 id="CDV"><span style="color:#79b9ef">C</span>ontract <span style="color:#79b9ef">D</span>etail <span style="color:#79b9ef">V</span>iewer</h2>
+            <br />
+            <h3 id="CDV"><span style="color:#D4B47C">C</span>ontract <br /> <span style="color:#D4B47C">D</span>etail <br /> <span style="color:#D4B47C">V</span>iewer</h3>
             <asp:Menu 
                 ID="subNavi" 
                 runat="server" 
                 EnabledViewState="false" 
-                Orientation="Horizontal" 
+                Orientation="Vertical" 
                 OnMenuItemClick="subNavi_MenuItemClick"
                 IncludeStyleBlock="true" 
                 ItemWrap="true"
                 CssClass="submenutestcss"                
                 >
-                <%--<StaticMenuItemStyle CssClass="submenutest" />--%>
-                <%--<StaticSelectedStyle CssClass="submenutest" />--%>
+                
                 <Items>
-                    <asp:MenuItem Text="Contract Details View" Selected="true"/>
-                    <asp:MenuItem Selectable="false" Text=" | " />
-                    <asp:MenuItem Text="Provider Credentialing View" />
-                    <asp:MenuItem Selectable="false" Text=" | " />
-                    <asp:MenuItem Text="Authorization Requirements View" />
-                    <asp:MenuItem Selectable="false" Text=" | " />
-                    <asp:MenuItem Text="Business Office Details View" />
+                    <asp:MenuItem Text="Contract Details" Selected="true"/>                    
+                    <asp:MenuItem Text="Provider Credentialing" />                    
+                    <asp:MenuItem Text="Authorization Requirements" />                    
+                    <asp:MenuItem Text="Business Office Details" />
                 </Items>
             </asp:Menu>
-            <%--<asp:Button ID="btnSub1" runat="server" class="btnSubMenu" Text="Details View" color="#fff" OnClick="btnSub1_Click"/>
-            <asp:Button ID="btnSub2" runat="server" class="btnSubMenu" Text="Provider Credentialing View" color="#fff" OnClick="btnSub2_Click"/>
-            <asp:Button ID="btnSub3" runat="server" class="btnSubMenu" Text="Authorization Requirements View" color="#fff" OnClick="btnSub3_Click"/>
-            <asp:Button ID="btnSub4" runat="server" class="btnSubMenu" Text="Business Office Details View" color="#fff" OnClick="btnSub4_Click"/>--%>
-        </div>               
-        <br />
-        <br />
-        <br />
+            
+        </div>
+</asp:Content>
+
+<asp:Content ID="stuff_2" ContentPlaceHolderID="MainContent" runat="server">
+        
         <%-- %>The bottom two lines are for debugging the GUID sql querystring process--%>
             <asp:Label ID="viewGUID" runat="server" Visible="false"></asp:Label>
             <asp:Label ID="viewGUID2" runat="server" Visible="false"></asp:Label>                
@@ -259,6 +220,5 @@ dl dt dd{
                 <asp:QueryStringParameter Name="guide" QueryStringField="guid" /><%--Type="Object" /> Commenting this out apparently re-fixed the querystring--%>
             </SelectParameters>
         </asp:SqlDataSource>
-    </form>
-</body>
-</html>
+    
+</asp:Content>

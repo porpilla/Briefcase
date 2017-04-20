@@ -11,6 +11,11 @@ h2{
     right: 30px;
 }
 
+h3{
+    font-size:1.5em;
+    color:#ffffff;
+}
+
 div{
     font-family:Arial, Helvetica, sans-serif;
 }
@@ -159,73 +164,76 @@ dl dt dd{
     cursor: pointer;
 }
 
-#CDV{
+/*#CDV{
     position: absolute;
     right: 5px;
+}*/
+#subNavigationBar{    
+    background-color:#2b4b83;    
+    z-index:1;
 }
-#subNavigationBar{
-    position: relative;
-    height: 60px;
-    /*background-color: #353535;*/
-    background-color:#383f49;
-}
-#subNavi ul li{        
+/*#subNavi ul li{        
     position: relative;
     top: 15px;
     border-radius:0px;
-    height: 55px;
-    /*width: 240px;*/
+    height: 55px;    
     font-family:Arial, Helvetica, sans-serif;
-    text-align:center;        
-    /*padding:15px 12px;*/
+    text-align:center;            
     margin: 0;
     background-color: #25477d;
     background-repeat: no-repeat;     
     display:table-cell;
     vertical-align:middle;  
-}
+}*/
 
-#subNavi ul li a{
+/*#subNavi ul li a{
     color:white;
     font-weight:bold;
     height:inherit;
     display:table-cell;
     vertical-align:middle;
-}
+}*/
 
-#subNavi ul li a.highlight:hover{
-    /*font-weight:bold;*/
+/*#subNavi ul li a.highlight:hover{    
     color: aliceblue;
     text-decoration:underline;
     cursor: pointer;
-}
+}*/
 
-#subNavi ul li.static.selected{
+/*#subNavi ul li.static.selected{
     background-color: black;
-}
+}*/
 #subNavi a.static.selected{
     color:#25477d;    
     background-color:white;
     height:inherit;
     border:double;
 }
-.submenutestcss ul li.static.selected{    
-    /*color:white !important;
-    background-color:white !important;*/
-}
-.submenutestcss{
+/*.submenutestcss ul li.static.selected{    
+    color:white !important;
+    background-color:white !important;
+}*/
+/*.submenutestcss{
     display:table-cell;
     vertical-align:middle;
+}*/
+#submenuview {
+    position:fixed;
+    margin-top:0px;    
+    width:180px;
+    background-color:#353535;
+    z-index:0;    
 }
 
 .viewer{
     width:80%;
     background-color:#fff;
-    margin:5px 0 10px 0;
-    margin-left:1in;
+    margin:0 0 10px 0;
+    margin-left:100px;
     border:solid 1px #525252;
     border-collapse:collapse;
     text-wrap:avoid;
+    z-index:2;
 }
 .viewer .detailheader td{
     font-weight:bold;

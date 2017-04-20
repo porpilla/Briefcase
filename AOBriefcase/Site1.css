@@ -1,5 +1,6 @@
 ﻿body {
     font-family:Arial, Helvetica, sans-serif;
+    margin-left:0;
 }
 
 h2{
@@ -16,7 +17,7 @@ h2{
     top: 0;
     height: 180px;
     width: 100%;
-    border:dashed;
+    border:none;
     background-color:white;
     z-index:3;
 }
@@ -68,6 +69,13 @@ h2{
     background-color: #888889;
 }
 
+#viewerNaviMenu{    
+    position:fixed;
+    margin-top:0px;        
+    width:180px;
+    z-index:1;
+}
+
 #mainContent{
     /*margin: 15px 0 0 0;*/
     position:center;
@@ -78,7 +86,7 @@ h2{
     padding-top:1cm;
     width:90%;
     max-width:700px;
-    z-index:1;    
+    z-index:2;    
 }
 
 #bottomContent{

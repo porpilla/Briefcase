@@ -87,19 +87,19 @@ namespace AOBriefcase
 
         protected void subNavi_MenuItemClick(object sender, MenuEventArgs e)
         {
-            if(e.Item.Text=="Contract Details View")
+            if(e.Item.Text=="Contract Details")
             {
                 btnSub1_Click();
             }
-            if(e.Item.Text=="Provider Credentialing View")
+            if(e.Item.Text=="Provider Credentialing")
             {
                 btnSub2_Click();
             }
-            if(e.Item.Text=="Authorization Requirements View")
+            if(e.Item.Text=="Authorization Requirements")
             {
                 btnSub3_Click();
             }
-            if(e.Item.Text=="Business Office Details View")
+            if(e.Item.Text=="Business Office Details")
             {
                 btnSub4_Click();
             }
