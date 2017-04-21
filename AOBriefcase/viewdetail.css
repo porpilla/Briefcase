@@ -14,6 +14,7 @@ h2{
 h3{
     font-size:1.5em;
     color:#ffffff;
+    padding-left:5px;
 }
 
 div{
@@ -164,13 +165,31 @@ dl dt dd{
     cursor: pointer;
 }
 
-/*#CDV{
-    position: absolute;
-    right: 5px;
-}*/
 #subNavigationBar{    
+    margin-left:5px;
     background-color:#2b4b83;    
     z-index:1;
+    height:250px;
+}
+
+#submenu_subNavi a{
+    color:#2b4b83;
+    background:white;
+    padding-right:9px;
+    padding-left:5px;
+    margin-left:5px;    
+}
+
+#submenu_subNavi a.selected {
+    color:white;
+    background:#2b4b83;
+    border:solid;
+    font-weight:bold;            
+}
+
+#submenu_subNavi a:hover{
+    color:white;
+    background-color:#353535;
 }
 /*#subNavi ul li{        
     position: relative;
@@ -203,12 +222,12 @@ dl dt dd{
 /*#subNavi ul li.static.selected{
     background-color: black;
 }*/
-#subNavi a.static.selected{
+/*#subNavi a.static.selected{
     color:#25477d;    
     background-color:white;
     height:inherit;
     border:double;
-}
+}*/
 /*.submenutestcss ul li.static.selected{    
     color:white !important;
     background-color:white !important;
@@ -230,7 +249,7 @@ dl dt dd{
     background-color:#fff;
     margin:0 0 10px 0;
     margin-left:100px;
-    border:solid 1px #525252;
+    border:solid 1px #525252;    
     border-collapse:collapse;
     text-wrap:avoid;
     z-index:2;

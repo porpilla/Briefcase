@@ -7,52 +7,31 @@
     <link rel="stylesheet" href="viewdetail.css" type="text/css" />
 </asp:Content>   
 
-
-<%--<body>--%>
-    <%--<form id="form1" runat="server">--%>
-        <%--<asp:Image ID="AOLogo" runat="server" ImageURL="~/Images/AOlogo.png"/>--%>
-
-        <%--<div id="NavigationBar">
-            <h2 id="CRD"><span style="color:#79b9ef">C</span>ontract <span style="color:#79b9ef">R</span>eference <span style="color:#79b9ef">D</span>atabase</h2>      
-            <asp:Menu 
-                ID="Navi" 
-                runat="server" 
-                EnableViewState="false" 
-                Orientation="Horizontal"
-                >
-                <Items>
-                    <asp:MenuItem NavigateUrl="~/disclaimer.aspx" Text="Home " />                    
-                    <asp:MenuItem NavigateUrl="~/WebForm1.aspx" Text="Search for a Contract " />                    
-                    <asp:MenuItem NavigateUrl="~/DBEdit.aspx" Text="Edit Contracts " />                    
-                    <asp:MenuItem NavigateUrl="~/Contacts.aspx" Text="Contact" />
-                </Items>
-            </asp:Menu>
-        </div>--%>
         
 <asp:Content ID="submenuview" ContentPlaceHolderID="submenu" runat="server">
-        <div id="subNavigationBar">
-            <br />
-            <h3 id="CDV"><span style="color:#D4B47C">C</span>ontract <br /> <span style="color:#D4B47C">D</span>etail <br /> <span style="color:#D4B47C">V</span>iewer</h3>
-            <asp:Menu 
-                ID="subNavi" 
-                runat="server" 
-                EnabledViewState="false" 
-                Orientation="Vertical" 
-                OnMenuItemClick="subNavi_MenuItemClick"
-                IncludeStyleBlock="true" 
-                ItemWrap="true"
-                CssClass="submenutestcss"                
-                >
+    <div id="subNavigationBar">
+        <br />
+        <h3 id="CDV"><span style="color:#D4B47C">C</span>ontract <br /> <span style="color:#D4B47C">D</span>etail <br /> <span style="color:#D4B47C">V</span>iewer</h3>
+        <asp:Menu 
+            ID="subNavi" 
+            runat="server" 
+            EnabledViewState="false" 
+            Orientation="Vertical" 
+            OnMenuItemClick="subNavi_MenuItemClick"
+            IncludeStyleBlock="true" 
+            ItemWrap="true"
+            CssClass="submenutestcss"                
+            >
                 
-                <Items>
-                    <asp:MenuItem Text="Contract Details" Selected="true"/>                    
-                    <asp:MenuItem Text="Provider Credentialing" />                    
-                    <asp:MenuItem Text="Authorization Requirements" />                    
-                    <asp:MenuItem Text="Business Office Details" />
-                </Items>
-            </asp:Menu>
+            <Items>
+                <asp:MenuItem Text="Contract Details" Selected="true"/>                    
+                <asp:MenuItem Text="Provider Credentialing" />                    
+                <asp:MenuItem Text="Authorization Requirements" />                    
+                <asp:MenuItem Text="Business Office Details" />
+            </Items>
+        </asp:Menu>
             
-        </div>
+    </div>
 </asp:Content>
 
 <asp:Content ID="stuff_2" ContentPlaceHolderID="MainContent" runat="server">
@@ -60,86 +39,7 @@
         <%-- %>The bottom two lines are for debugging the GUID sql querystring process--%>
             <asp:Label ID="viewGUID" runat="server" Visible="false"></asp:Label>
             <asp:Label ID="viewGUID2" runat="server" Visible="false"></asp:Label>                
-        <%--Commenting the hardcoded entries here makes the whole thing explode for some reason. Use Visible="false.--%>
-        <%--<asp:PlaceHolder ID="phViewDetail" runat="server" Visible="false">
-            <dl>
-                <dt style="padding-left: 50px;">Contract Details<br /><br /></dt>                           
-                <dt>Contract Name:<br /></dt>
-                <dd><asp:Label ID="lblCName" runat="server" /><br /></dd>
-                <dt>Contract Type:<br /></dt>
-                <dd><asp:Label ID="lblCType" runat="server" /><br /></dd>
-                <dt>Parent Organization:<br /></dt>
-                <dd><asp:Label ID="lblCParent" runat="server" /><br /></dd>
-                <dt>Financial Class:<br /></dt>
-                <dd><asp:Label ID="lblCFC" runat="server" /><br /></dd>
-                <dt>Phone Number:<br /></dt>
-                <dd><asp:Label ID="lblCPhone" runat="server" /><br /></dd>
-                <dt>Webpage:<br /></dt>
-                <dd><asp:Label ID="lblCWeb" runat="server" /><br /></dd>
-                <dt>Status:<br /></dt>
-                <dd><asp:Label ID="lblCStatus" runat="server" /><br /></dd>
-                <dt>Effective Date:<br /></dt>
-                <dd><asp:Label ID="lblEffDate" runat="server" /><br /></dd>
-                <dt>Termination Date:<br /></dt>
-                <dd><asp:Label ID="lblTermDate" runat="server" /><br /></dd>
-                <dt>Last Updated:<br /></dt>
-                <dd><asp:Label ID="lblUpdDate" runat="server" /><br /><br /></dd>
-                <dt><br /></dt>            
-                <dt style="padding-left: 50px;">Covered Services<br /><br /></dt>
-                <dt>Office Visits:<br /></dt>
-                <dd><asp:Label ID="lblOffice" runat="server" /><br /></dd>
-                <dt>Surgery:<br /></dt>
-                <dd><asp:Label ID="lblSX" runat="server" /><br /></dd>
-                <dt>Radiology:<br /></dt>
-                <dd><asp:Label ID="lblXray" runat="server" /><br /></dd>
-                <dt>Physical Therapy:<br /></dt>
-                <dd><asp:Label ID="lblPT" runat="server" /><br /></dd>
-                <dt>Occupational Therapy:<br /></dt>
-                <dd><asp:Label ID="lblOT" runat="server" /><br /></dd>
-                <dt>Pain Management:<br /></dt>
-                <dd><asp:Label ID="lblPainMgmt" runat="server" /><br /></dd>
-                <dt>Durable Medical Equipment (DME):<br /></dt>
-                <dd><asp:Label ID="lblDME" runat="server" /><br /></dd>
-                <dt>Podiatry:<br /></dt>
-                <dd><asp:Label ID="lblPodiatry" runat="server" /><br /></dd>
-                <dt>Injections:<br /></dt>
-                <dd><asp:Label ID="lblInject" runat="server" /><br /></dd>
-                <dt>Injectables:<br /></dt>
-                <dd><asp:Label ID="lblDrug" runat="server" /><br /></dd>
-                <dt>Download Cheat Sheet<br /></dt>
-                <dd><asp:Label ID="lblPDF" runat="server" /><br /></dd>
-                <dt><br /><br /></dt>
-                <dt style="padding-left: 50px;">Authorization Requirements<br /><br /></dt>
-                <dt>Provider Portal:</dt>
-                <dd>Placeholder1</dd>
-                <dt>Office Visits:</dt>
-                <dd>Placeholder1</dd>
-                <dt>Surgery:</dt>
-                <dd>Placeholder1</dd>
-                <dt>X-rays:</dt>
-                <dd>Placeholder1</dd>
-                <dt>DME:</dt>
-                <dd>Placeholder1</dd>
-                <dt>Therapeutic Injections:</dt>
-                <dd>Placeholder1</dd>
-                <dt>Viscosupplementation:</dt>
-                <dd>Placeholder1</dd>
-                <dt>Pain Management:</dt>
-                <dd>Placeholder1</dd>
-                <dt>Physical Therapy:</dt>
-                <dd>Placeholder1</dd>
-                <dt>Occupational Therapy:</dt>
-                <dd>Placeholder1</dd>
-                <dt>Podiatry:</dt>
-                <dd>Placeholder1</dd>
-                <dt>Bundled Services:</dt>
-                <dd>Placeholder1</dd>
-                <dt>Other:</dt>
-                <dd>Placeholder1</dd>
-                <dt><br /><br /><br /></dt>
-                <dd><a href="WebForm1.aspx">Back to search page</a></dd>
-            </dl>
-        </asp:PlaceHolder>--%>
+        
         <asp:PlaceHolder ID="phNoViewDetail" runat="server" Visible="false">
             <p>No contract selected</p>
         </asp:PlaceHolder>
@@ -155,10 +55,10 @@
             HeaderStyle-CssClass="detailheader"
             FieldHeaderStyle-CssClass="detailfieldheader"
             AlternatingRowStyle-CssClass="alternatingRow"
-        >
-<AlternatingRowStyle CssClass="alternatingRow"></AlternatingRowStyle>
-
-<FieldHeaderStyle CssClass="detailfieldheader"></FieldHeaderStyle>
+            >
+            <AlternatingRowStyle CssClass="alternatingRow"></AlternatingRowStyle>
+            <FieldHeaderStyle CssClass="detailfieldheader"></FieldHeaderStyle>
+            
             <Fields>
                 <%--<asp:BoundField DataField="ContractID" HeaderText="ContractID" InsertVisible="False" ReadOnly="True" SortExpression="ContractID"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Center"/>--%>
                 <asp:BoundField DataField="AOID" HeaderText="AOID" SortExpression="AOID"/>

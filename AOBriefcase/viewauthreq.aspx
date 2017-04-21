@@ -1,35 +1,47 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="viewauthreq.aspx.cs" Inherits="AOBriefcase.viewauthreq" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="viewauthreq.aspx.cs" Inherits="AOBriefcase.viewauthreq" %>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<asp:Content ID="stuff_1" ContentPlaceHolderID="head" runat="server">
     <title>Authorizations Requirements Viewer</title>
-    <link rel="shortcut icon" type="image/x-icon" href="~/Images/favicon.ico" runat="server"/>
-    <link rel="icon" type="image/ico" href="~/Images/favicon.ico" runat="server"/>
-<style type="text/css" media="screen">
-    @import "viewauthreq.css";
-</style>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <asp:Image ID="AOLogo" runat="server" ImageUrl="~/Images/AOlogo.png" />
-        <h2>Authorizations Requirements Viewer</h2>
-        <a href="WebForm1.aspx">Back to search page</a>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="viewauthreq.css" type="text/css" />
+</asp:Content>
+
+
+<asp:Content ID="submenuview" ContentPlaceHolderID="submenu" runat="server">
+    <div id="subNavigationBar">
         <br />
-        <br />
-        <div id="subMenu">
-            <asp:Button ID="btnSub1" runat="server" class="btnSubMenu" Text="Details View" color="#fff" OnClick="btnSub1_Click" />
-            <asp:Button ID="btnSub2" runat="server" class="btnSubMenu" Text="Provider Credentialing View" color="#fff" OnClick="btnSub2_Click"/>
-            <asp:Button ID="btnSub3" runat="server" class="btnSubMenu" Text="Authorization Requirements View" color="#fff" OnClick="btnSub3_Click"/>
-            <asp:Button ID="btnSub4" runat="server" class="btnSubMenu" Text="Business Office Details View" color="#fff" OnClick="btnSub4_Click"/>    
-        </div>
-            <br />
-            <br />
-            <br />
+        <h3 id="ARV"><span style="color:#D4B47C">A</span>uthorizations <br /> <span style="color:#D4B47C">R</span>equirements <br /> <span style="color:#D4B47C">V</span>iewer</h3>
+        <asp:Menu
+            ID="subNavi"
+            runat="server"
+            EnabledViewState="false"
+            Orientation="Vertical"
+            OnMenuItemClick="subNavi_MenuItem_Click"
+            IncludeStyleBlock="true"
+            ItemWrap="true"
+            CssClass="submenutestcss"
+            >
+
+            <Items>
+                <asp:MenuItem Text="Contract Details" Selected="true"/>                    
+                <asp:MenuItem Text="Provider Credentialing" />                    
+                <asp:MenuItem Text="Authorization Requirements" />                    
+                <asp:MenuItem Text="Business Office Details" />
+            </Items>
+
+        </asp:Menu>
+
+    </div>
+</asp:Content>
+        
+
+<asp:Content ID="stuff_2" ContentPlaceHolderID="MainContent" runat="server">
+
         <%-- %>The bottom two lines are for debugging the GUID sql querystring process--%>
             <asp:Label ID="viewGUID" runat="server" Visible="false"></asp:Label>
             <asp:Label ID="viewGUID2" runat="server" Visible="false"></asp:Label>        
+        
         <asp:DetailsView ID="DetailsView2" 
             runat="server" 
             AutoGenerateRows="False" 
@@ -41,7 +53,8 @@
             HeaderStyle-CssClass="detailheader"
             FieldHeaderStyle-CssClass="detailfieldheader"
             AlternatingRowStyle-CssClass="alternatingRow"
-        >
+            >
+
             <Fields>
                 <%--<asp:BoundField DataField="ContractID" HeaderText="ContractID" InsertVisible="False" ReadOnly="True" SortExpression="ContractID"  HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Center" headerStyle-Wrap="false" HeaderStyle-Height="40px"/>--%>
                 <asp:BoundField DataField="AOID" HeaderText="AOID" SortExpression="AOID"/>
@@ -93,12 +106,13 @@
                 <asp:HyperLinkField DataNavigateUrlFields="GUID, Contract_PDF" DataNavigateUrlFormatString="downloads.aspx?guid={0}&file={1}" HeaderText="Authorizations Detail File" Text="Download" SortExpression="Contract_PDF"/>
                 <%--<asp:BoundField DataField="GUID" HeaderText="GUID" SortExpression="GUID" />--%>
             </Fields>
+            <HeaderStyle CssClass="detailheader" ></HeaderStyle>
         </asp:DetailsView>
+
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DemographicsConnectionString %>" SelectCommand="SELECT * FROM [Contract_Demographics] WHERE ([GUID] = @guide)">
             <SelectParameters>
                 <asp:QueryStringParameter Name="guide" QueryStringField="guid" /><%--Type="Object" /> Commenting this out apparently re-fixed the querystring--%>
             </SelectParameters>
         </asp:SqlDataSource>
-    </form>
-</body>
-</html>
+    
+</asp:Content>
