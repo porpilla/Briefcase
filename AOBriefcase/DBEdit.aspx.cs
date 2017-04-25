@@ -32,7 +32,14 @@ namespace AOBriefcase
             else
             {
                 Response.Write("Non-Admin authentication detected");
-            }            
+            }
+
+            if (this.Page.IsPostBack)
+            {
+                editHeaders.Visible = false;                
+            }
+
+            // GridView1.DataBind();
         }
                
         /// <summary>
@@ -41,16 +48,21 @@ namespace AOBriefcase
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void ChangeSelectedIndex(object sender, EventArgs e)
-        {
+        {            
             int viewPage = GridView1.PageIndex * 10;
             DetailsView1.Visible = true;
             int viewIndex = GridView1.SelectedIndex;
             int DetailIndex = viewPage + viewIndex;
             DetailsView1.PageIndex = DetailIndex;
-            StatusLabel1.Text = "Editing interface opened for:";
+            
             StatusLabel1.Visible = true;
             btnEditCred.Visible = true;
+            btnEditClose.Visible = true;
+            GridView1.Visible = false;
+            string PulledContractName = GridView1.SelectedRow.Cells[5].Text;
+            StatusLabel1.Text = "Editing interface opened for: " + PulledContractName;            
         }
+               
 
         /// <summary>
         /// Button to change contract editing interface to provider credentialing 
@@ -60,6 +72,7 @@ namespace AOBriefcase
         protected void btnEditCred_Click(object sender, EventArgs e)
         {
             btnEditCred.Visible = false;
+            btnEditClose.Visible = true;
             DetailsView1.Visible = false;
             GridView2.Visible = true;
             btnEditCont.Visible = true;
@@ -73,11 +86,23 @@ namespace AOBriefcase
         protected void btnEditCont_Click(object sender, EventArgs e)
         {
             btnEditCred.Visible = true;
+            btnEditClose.Visible = true;
             DetailsView1.Visible = true;
             btnEditCont.Visible = false;
             GridView2.Visible = false;
         }
-                
+
+        
+        protected void btnEditClose_Click(object sender, EventArgs e)
+        {
+            StatusLabel1.Visible = false;
+            btnEditCred.Visible = false;
+            btnEditCont.Visible = false;
+            DetailsView1.Visible = false;
+            GridView2.Visible = false;
+            GridView1.Visible = true;
+            btnEditClose.Visible = false;
+        }        
         /// <summary>
         /// Debug trigger. Not currently used. 
         /// </summary>
@@ -129,6 +154,45 @@ namespace AOBriefcase
             if (fileU_Contract_PDF.HasFile)
             {
                 fileU_Contract_PDF.PostedFile.SaveAs(Server.MapPath("~/App_Data/Attachments/Authorizations/") + fileU_Contract_PDF.FileName);
+            }
+        }
+
+
+        // viewdetail page view submenu button method template. This should be optimized into a single class in a future patch.
+        protected void btnSub1_Click()
+        {            
+            Response.Redirect("~/DBEdit.aspx");
+        }
+        protected void btnSub2_Click()
+        {            
+            Response.Redirect("~/ProviderEdit.aspx");
+        }
+        protected void btnSub3_Click()
+        {            
+            Response.Redirect("~/UserRegistry.aspx");
+        }
+        protected void btnSub4_Click()
+        {            
+            Response.Redirect("~/AttachmentInterface.aspx");
+        }
+
+        protected void subNavi_MenuItem_Click(object sender, MenuEventArgs e)
+        {
+            if (e.Item.Text == "Configure Contracts")
+            {
+                btnSub1_Click();
+            }
+            if (e.Item.Text == "Configure Providers")
+            {
+                btnSub2_Click();
+            }
+            if (e.Item.Text == "Configure Billing Users")
+            {
+                btnSub3_Click();
+            }
+            if (e.Item.Text == "Configure Attachments")
+            {
+                btnSub4_Click();
             }
         }
 

@@ -1,49 +1,73 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site1.Master" UnobtrusiveValidationMode="none" AutoEventWireup="true" CodeBehind="DBEdit.aspx.cs" Inherits="AOBriefcase.DBEdit" MaintainScrollPositionOnPostBack = "true" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site1.Master" UnobtrusiveValidationMode="none" AutoEventWireup="true" CodeBehind="DBEdit.aspx.cs" Inherits="AOBriefcase.DBEdit" MaintainScrollPositionOnPostBack = "false" %>
 
 
 <asp:Content ID="stuff_1" ContentPlaceHolderID="head" runat="server">
     <title>Admin Page</title>
-    <link rel="stylesheet" href="DBEdit.css" type="text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="DBEdit.css" type="text/css"/>    
+</asp:Content>
+
+
+<asp:Content ID="submenuview" ContentPlaceHolderID="submenu" runat="server">
+    <div id="subNavigationBar">
+        <br />
+        <h3 id="DBE"><span style="color:#D4B47C">D</span>ata<span style="color:#D4B47C">B</span>ase <br /> <span style="color:#D4B47C">E</span>ditor</h3>
+        <asp:Menu
+            ID="subNavi"
+            runat="server"
+            EnabledViewState="false"
+            Orientation="Vertical"
+            OnMenuItemClick="subNavi_MenuItem_Click"
+            IncludeStyleBlock="true"
+            ItemWrap="true"
+            CssClass="submenutestcss"
+            >
+
+            <Items>
+                <asp:MenuItem Text="Configure Contracts" Selected="true" />
+                <asp:MenuItem Text="Configure Providers" />
+                <asp:MenuItem Text="Configure Billing Users" />
+                <asp:MenuItem Text="Configure Attachments" />
+            </Items>
+
+        </asp:Menu>
+
+    </div>
 </asp:Content>
 
 <asp:Content ID="stuff_2" ContentPlaceHolderID="MainContent" runat="server">
+
+    <div id="editHeaders" runat="server">
+        <asp:LoginView ID="LoginView1" runat="server">
+            <AnonymousTemplate>
+                Your session has not yet been authenticated. Please login to access the contract editors.
+            </AnonymousTemplate>
+            <LoggedInTemplate>
+                Administration account authenticated. Access to contract editors enabled.
+            </LoggedInTemplate>
+        </asp:LoginView>
+        <br />
+        Welcome
+        <asp:LoginName ID="LoginName2" runat="server" Font-Bold ="true" />                        
+        <asp:LoginStatus ID="LoginStatus2" runat="server" />        
+        <h2>You have entered the contract configuration module. Please be very careful here.</h2>
+        </div>
     
-    <asp:LoginView ID="LoginView1" runat="server">
-        <AnonymousTemplate>
-            Your session has not yet been authenticated. Please login to access the contract editors.
-        </AnonymousTemplate>
-        <LoggedInTemplate>
-            Administration account authenticated. Access to contract editors enabled.
-        </LoggedInTemplate>
-    </asp:LoginView>
-    <br />
-    Welcome
-    <asp:LoginName ID="LoginName2" runat="server" Font-Bold ="true" />                        
-    <asp:LoginStatus ID="LoginStatus2" runat="server" />        
-    <h2>You have entered the contract configuration module. Please be very careful here.</h2>
-    <br /><br />
-    <a href="ProviderEdit.aspx">Configure Providers</a>
-    <br />
-    <a href="UserRegistry.aspx">Configure Billing Users</a>
-    <br />
-    <a href="AttachmentInterface.aspx">Configure Attachments</a>
-    <br /><br />
-    <div>
-        <%--Welcome
-        <asp:LoginName ID="LoginName1" runat="server" Font-Bold ="true" />                        
-        <asp:LoginStatus ID="LoginStatus1" runat="server" />        --%>
-    </div>
-        <asp:Label ID="StatusLabel1" ForeColor="Red" runat="server" Visible="false"/>
+    <div id="editToggles" >
+        <asp:Label ID="StatusLabel1" ForeColor="Red" runat="server" Visible="false" AutoPostBack="true"/>
         <br />
         <asp:Button ID="btnEditCred" runat="server" class="btnDBSubMenu" Text="Edit this contract's Providers" color="#fff" OnClick="btnEditCred_Click" Visible="false"/>
         <asp:Button ID="btnEditCont" runat="server" class="btnDBSubMenu" Text="Edit this contract's Details" color="#fff" OnClick="btnEditCont_Click" Visible="false" />
+        <asp:Button ID="btnEditClose" runat="server" class="btnDBSubMenu" Text="Close Editing Interface" color="#fff" OnClick="btnEditClose_Click" Visible="false" />
+    </div>
+
         <asp:DetailsView 
             ID="DetailsView1" 
             runat="server" 
             AutoGenerateRows="False" 
             DataKeyNames="ContractID" 
             DataSourceID="SqlDataSource1"
-            OnRowDataBound="DV1_AttachmentCheck" 
+            OnRowDataBound="DV1_AttachmentCheck"            
             Height="50px" 
             Width="400px" 
             Visible="False" 
@@ -79,7 +103,7 @@
                             DataSourceID="FC_DataSource1" 
                             DataTextField="FinancialClass_Name" 
                             DataValueField="FinancialClass_Name" 
-                            SelectedValue='<%# Bind("FinancialClass_Name") %>'
+                            SelectedValue='<%# Bind("Contract_FC") %>'
                             >
                         </asp:DropDownList>
                     </EditItemTemplate>
@@ -90,7 +114,7 @@
                             DataSourceID="FC_DataSource1" 
                             DataTextField="FinancialClass_Name" 
                             DataValueField="FinancialClass_Name" 
-                            SelectedValue='<%# Bind("FinancialClass_Name") %>'
+                            SelectedValue='<%# Bind("Contract_FC") %>'
                             >
                         </asp:DropDownList>
                     </InsertItemTemplate>
@@ -233,11 +257,15 @@
             AutoGenerateColumns="False" 
             DataKeyNames="ContractID" 
             DataSourceID="SqlDataSource1" 
-            OnSelectedIndexChanged="ChangeSelectedIndex"
+            OnSelectedIndexChanged="ChangeSelectedIndex"            
             HeaderStyle-Backcolor="#2b4b83"
             HeaderStyle-Forecolor="White" 
+            CssClass="viewer"
+	        HeaderStyle-CssClass="detailheader"
+	        FieldHeaderStyle-CssClass="detailfieldheader"
+	        AlternatingRowStyle-CssClass="alternatingRow" 
             RowStyle-Wrap="false" 
-            HeaderStyle-Wrap="false"
+            HeaderStyle-Wrap="false"            
             >
             <Columns>
                 <asp:CommandField ShowSelectButton="True" ButtonType="Button"/>

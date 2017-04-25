@@ -20,10 +20,10 @@
             <div id="UserInfo">
                 <asp:LoginView ID="LoginView1" runat="server">
                     <AnonymousTemplate>
-                        Anonymous User
+                        AO User
                     </AnonymousTemplate>
                     <LoggedInTemplate>
-                        Authenticated User
+                        AO Admin
                     </LoggedInTemplate>
                 </asp:LoginView>
 
@@ -31,7 +31,7 @@
                 <asp:LoginStatus ID="LoginStatus2" runat="server" />
             </div>
 
-            <div id="NavigationBar">
+            <div id="NavigationBar" runat="server">
                 <h2 id="CRD"><span style="color:#79b9ef">C</span>ontract <span style="color:#79b9ef">R</span>eference <span style="color:#79b9ef">D</span>atabase</h2>      
                 <a href="/disclaimer.aspx">Home</a>
                 <a href="/WebForm1.aspx">Search for a Contract</a>

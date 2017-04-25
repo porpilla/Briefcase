@@ -94,6 +94,6 @@ h2{
     bottom: 0;
     height: 60px;
     width: 100%;
-    border:dashed;
+    border:none;
     z-index:3;
 }

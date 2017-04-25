@@ -24,9 +24,9 @@
             >
 
             <Items>
-                <asp:MenuItem Text="Contract Details" Selected="true"/>                    
+                <asp:MenuItem Text="Contract Details" />
                 <asp:MenuItem Text="Provider Credentialing" />                    
-                <asp:MenuItem Text="Authorization Requirements" />                    
+                <asp:MenuItem Text="Authorization Requirements" Selected="true"/>                    
                 <asp:MenuItem Text="Business Office Details" />
             </Items>
 

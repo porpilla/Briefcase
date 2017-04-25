@@ -67,6 +67,15 @@ namespace AOBriefcase {
         protected global::System.Web.UI.WebControls.LoginStatus LoginStatus2;
         
         /// <summary>
+        /// NavigationBar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl NavigationBar;
+        
+        /// <summary>
         /// submenu control.
         /// </summary>
         /// <remarks>

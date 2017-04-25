@@ -13,6 +13,24 @@ namespace AOBriefcase {
     public partial class DBEdit {
         
         /// <summary>
+        /// subNavi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Menu subNavi;
+        
+        /// <summary>
+        /// editHeaders control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl editHeaders;
+        
+        /// <summary>
         /// LoginView1 control.
         /// </summary>
         /// <remarks>
@@ -65,6 +83,15 @@ namespace AOBriefcase {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEditCont;
+        
+        /// <summary>
+        /// btnEditClose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEditClose;
         
         /// <summary>
         /// DetailsView1 control.

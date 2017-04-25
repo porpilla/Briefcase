@@ -20,9 +20,9 @@
     </div>
 
     <div id="Contents">
-        <p>For questions regarding contract information, please contact:</p>
-        <p>For questions regarding credentialing information, please contact:</p>
-        <p>For questions regarding billing/collection information regarding contracts, please contact:</p>
-        <p>To report issues with this web application, please contact:</p>
+        <p>For questions regarding contract information, please contact the <a href="mailto:Contracting@Arrowheadortho.com?subject=Contract%20Information%20Question">Director of Business Services</a>.</p>
+        <p>For questions regarding credentialing information, please contact the <a href="mailto:Credentialing@Arrowheadortho.com?subject=Provider%20Credentialing%Question">Credentialing Department</a>.</p>
+        <p>For questions regarding billing/collection information regarding contracts, please contact the <a href="mailto:Michaela.Gorlack@Arrowheadortho.com?subject=Business%20Office%20Question">Business Office Supervisor</a>.</p>
+        <p>To report issues with this web application, please contact <a href="mailto:Paul.Orpilla@Arrowheadortho.com?subject=Database%20Question">Web Application Administrator</a>.</p>
     </div>
 </asp:Content>
