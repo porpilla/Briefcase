@@ -31,21 +31,15 @@
                 <asp:LoginStatus ID="LoginStatus2" runat="server" />
             </div>
 
-            <div id="NavigationBar" runat="server">
+            <div id="NavigationBar">
                 <h2 id="CRD"><span style="color:#79b9ef">C</span>ontract <span style="color:#79b9ef">R</span>eference <span style="color:#79b9ef">D</span>atabase</h2>      
-                <a href="/disclaimer.aspx">Home</a>
-                <a href="/WebForm1.aspx">Search for a Contract</a>
-                <a href="/DBEdit.aspx">Edit Contracts</a>
-                <a href="/Contacts.aspx">Contact</a>
-
-                <%--<asp:Menu ID="Navi" runat="server" EnableViewState="false" Orientation="Horizontal">
-                    <Items>
-                        <asp:MenuItem NavigateUrl="~/disclaimer.aspx" Text="Home" />
-                        <asp:MenuItem NavigateUrl="~/WebForm1.aspx" Text="Search for a Contract" />
-                        <asp:MenuItem NavigateUrl="~/DBEdit.aspx" Text="Edit Contracts" />
-                        <asp:MenuItem NavigateUrl="~/Contact.aspx" Text="Contact" />
-                    </Items>
-                </asp:Menu>--%>
+                <div id="NavigationBarButtons" runat="server">
+                    <a runat="server" id="menu1" href="/disclaimer.aspx">Home</a>
+                    <a runat="server" id="menu2" href="/WebForm1.aspx">Search for a Contract</a>
+                    <a runat="server" id="menu3" href="/DBEdit.aspx">Edit Contracts</a>
+                    <a runat="server" id="menu4" href="/Contacts.aspx">Contact</a>
+                </div>
+                
             <br />
             </div>
         </div>

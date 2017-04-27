@@ -12,7 +12,7 @@ namespace AOBriefcase
         protected void Page_Load(object sender, EventArgs e)
         {
             Site1 MasterPage = (Site1)Page.Master;
-            MasterPage.FindControl("NavigationBar").Visible = false;            
+            MasterPage.FindControl("NavigationBarButtons").Visible = false;            
         }
 
         protected void btnAccept_Click(object sender, EventArgs e)

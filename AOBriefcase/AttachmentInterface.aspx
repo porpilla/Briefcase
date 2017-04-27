@@ -19,6 +19,11 @@
         <h2>You have entered the attachment management interface. This is where you can upload PDF attachments for authorizations or billing.</h2>
     <br />
     <br />
+
+        <div id="selectionInfoSpace">
+            <asp:Label ID="selectionInfo" Visible="false" runat="server"></asp:Label>
+        </div>
+
         <div id="AuthDoc" visible="false" runat="server">
             <p>Upload authorizations detail file here:</p>
             <asp:FileUpload ID="AuthUpload1" runat="server" />
@@ -35,7 +40,7 @@
             ID="GridView1" 
             runat="server" 
             AutoGenerateColumns="False" 
-            DataKeyNames="ContractID" 
+            DataKeyNames="GUID" 
             DataSourceID="SqlDataSource1"
             OnSelectedIndexChanged="IndexSelected"
             >
@@ -44,7 +49,7 @@
                 <asp:BoundField DataField="AOID" HeaderText="AOID" SortExpression="AOID" />
                 <asp:BoundField DataField="Contract_Name" HeaderText="Contract Name" SortExpression="Contract_Name"></asp:BoundField>
                 <asp:BoundField DataField="Contract_PDF" HeaderText="Authorizations Detail File" SortExpression="Contract_PDF"></asp:BoundField>
-                <asp:BoundField DataField="Billing_PDF" HeaderText="Billing Detail File" SortExpression="Billing_PDF" /><asp:BoundField />                
+                <asp:BoundField DataField="Billing_PDF" HeaderText="Billing Detail File" SortExpression="Billing_PDF" ></asp:BoundField>                
             </Columns>
         </asp:GridView>
 
@@ -52,7 +57,7 @@
 
         </asp:Label>
 
-        <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT * FROM [Contract_Demographics]"></asp:SqlDataSource>
+        <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT * FROM [Contract_Demographics] ORDER BY [AOID], [Amend_Count]"></asp:SqlDataSource>
     </form>
 </body>
 </html>

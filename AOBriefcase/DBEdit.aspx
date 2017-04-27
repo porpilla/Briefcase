@@ -37,7 +37,7 @@
 
 <asp:Content ID="stuff_2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div id="editHeaders" runat="server">
+    <div id="editHeaders" runat="server" class="editHeaders">
         <asp:LoginView ID="LoginView1" runat="server">
             <AnonymousTemplate>
                 Your session has not yet been authenticated. Please login to access the contract editors.
@@ -46,12 +46,9 @@
                 Administration account authenticated. Access to contract editors enabled.
             </LoggedInTemplate>
         </asp:LoginView>
-        <br />
-        Welcome
-        <asp:LoginName ID="LoginName2" runat="server" Font-Bold ="true" />                        
-        <asp:LoginStatus ID="LoginStatus2" runat="server" />        
+        <br />        
         <h2>You have entered the contract configuration module. Please be very careful here.</h2>
-        </div>
+    </div>
     
     <div id="editToggles" >
         <asp:Label ID="StatusLabel1" ForeColor="Red" runat="server" Visible="false" AutoPostBack="true"/>

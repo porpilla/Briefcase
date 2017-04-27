@@ -58,6 +58,7 @@ namespace AOBriefcase
 
         protected void IndexSelected(object sender, EventArgs e)
         {
+            selectionInfo.Visible = true;
             AuthDoc.Visible = true;
             BillDoc.Visible = true;
 
@@ -81,6 +82,10 @@ namespace AOBriefcase
                 btnBillClear.Visible = false;
                 btnBillUpload.Visible = true;
             }
+
+            int referenceIndex = GridView1.SelectedIndex;
+            string guidIndex = GridView1.DataKeys[referenceIndex].Value.ToString();
+            selectionInfo.Text = "You will be uploading attachments to: " + guidIndex;
         }
 
         // In order for file deletion methods to work, NETWORK SERVICES user must be enabled on /Attachments directory
@@ -103,12 +108,16 @@ namespace AOBriefcase
         {
             string AuthFileName = "debug";
             SqlConnection sqlcon = new SqlConnection(GetConnection());
+
+            int referenceIndex = GridView1.SelectedIndex;
+            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Value.ToString());
+
             try
             {
                 sqlcon.Open();
-                SqlCommand cmd = new SqlCommand("SELECT [Contract_PDF] FROM [Contract_Demographics] WHERE [ContractID]=@SelectedIndex", sqlcon);
-                SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.Int);
-                ChosenIndex.Value = GridView1.SelectedIndex + 1;
+                SqlCommand cmd = new SqlCommand("SELECT [Contract_PDF] FROM [Contract_Demographics] WHERE [GUID]=@SelectedIndex", sqlcon);
+                SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.UniqueIdentifier);
+                ChosenIndex.Value = guidIndex;// GridView1.SelectedIndex + 1;
                 cmd.Parameters.Add(ChosenIndex);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -140,12 +149,16 @@ namespace AOBriefcase
         {
             string BillFileName = "debug";
             SqlConnection sqlcon = new SqlConnection(GetConnection());
+
+            int referenceIndex = GridView1.SelectedIndex;
+            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Value.ToString());
+
             try
             {
                 sqlcon.Open();
-                SqlCommand cmd = new SqlCommand("SELECT [Billing_PDF] FROM [Contract_Demographics] WHERE [ContractID]=@SelectedIndex", sqlcon);
-                SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.Int);
-                ChosenIndex.Value = GridView1.SelectedIndex + 1;
+                SqlCommand cmd = new SqlCommand("SELECT [Billing_PDF] FROM [Contract_Demographics] WHERE [GUID]=@SelectedIndex", sqlcon);
+                SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.UniqueIdentifier);
+                ChosenIndex.Value = guidIndex;// GridView1.SelectedIndex + 1;
                 cmd.Parameters.Add(ChosenIndex);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -177,15 +190,19 @@ namespace AOBriefcase
         private void InsertAuthFilepath(string filepath)
         {
             SqlConnection sqlcon = new SqlConnection(GetConnection());
+
+            int referenceIndex = GridView1.SelectedIndex;
+            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Value.ToString());
+
             try
             {
                 sqlcon.Open();
                 SqlCommand cmd = new SqlCommand("spUpdateAuthFilePath", sqlcon);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlParameter param = new SqlParameter("@filepath", SqlDbType.VarChar);
-                SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.Int);
+                SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.UniqueIdentifier);
                 param.Value = filepath;
-                ChosenIndex.Value = GridView1.SelectedIndex + 1;
+                ChosenIndex.Value = guidIndex;
                 cmd.Parameters.Add(ChosenIndex);
                 cmd.Parameters.Add(param);
                 cmd.ExecuteNonQuery();
@@ -205,15 +222,19 @@ namespace AOBriefcase
         private void InsertBillFilepath(string filepath)
         {
             SqlConnection sqlcon = new SqlConnection(GetConnection());
+
+            int referenceIndex = GridView1.SelectedIndex;
+            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Value.ToString());
+
             try
             {
                 sqlcon.Open();
                 SqlCommand cmd = new SqlCommand("spUpdateBillFilePath", sqlcon);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlParameter param = new SqlParameter("@filepath", SqlDbType.VarChar);
-                SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.Int);
+                SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.UniqueIdentifier);
                 param.Value = filepath;
-                ChosenIndex.Value = GridView1.SelectedIndex + 1;
+                ChosenIndex.Value = guidIndex;
                 cmd.Parameters.Add(ChosenIndex);
                 cmd.Parameters.Add(param);
                 cmd.ExecuteNonQuery();
@@ -233,6 +254,10 @@ namespace AOBriefcase
         private void ClearAuthDBEntry()
         {
             SqlConnection sqlcon = new SqlConnection(GetConnection());
+
+            int referenceIndex = GridView1.SelectedIndex;
+            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Value.ToString());
+
             try
             {
                 sqlcon.Open();
@@ -240,9 +265,9 @@ namespace AOBriefcase
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlParameter param = new SqlParameter("@filepath", SqlDbType.VarChar);
                 param.IsNullable = true;
-                SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.Int);
+                SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.UniqueIdentifier);
                 param.Value = DBNull.Value;
-                ChosenIndex.Value = GridView1.SelectedIndex + 1;
+                ChosenIndex.Value = guidIndex;
                 cmd.Parameters.Add(ChosenIndex);
                 cmd.Parameters.Add(param);
                 cmd.ExecuteNonQuery();
@@ -262,6 +287,10 @@ namespace AOBriefcase
         protected void ClearBillDBEntry()
         {
             SqlConnection sqlcon = new SqlConnection(GetConnection());
+
+            int referenceIndex = GridView1.SelectedIndex;
+            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Value.ToString());
+
             try
             {
                 sqlcon.Open();
@@ -269,9 +298,9 @@ namespace AOBriefcase
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlParameter param = new SqlParameter("@filepath", SqlDbType.VarChar);
                 param.IsNullable = true;
-                SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.Int);
+                SqlParameter ChosenIndex = new SqlParameter("@SelectedIndex", SqlDbType.UniqueIdentifier);
                 param.Value = DBNull.Value;
-                ChosenIndex.Value = GridView1.SelectedIndex + 1;
+                ChosenIndex.Value = guidIndex;
                 cmd.Parameters.Add(ChosenIndex);
                 cmd.Parameters.Add(param);
                 cmd.ExecuteNonQuery();

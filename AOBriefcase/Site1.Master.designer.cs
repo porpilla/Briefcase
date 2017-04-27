@@ -67,13 +67,49 @@ namespace AOBriefcase {
         protected global::System.Web.UI.WebControls.LoginStatus LoginStatus2;
         
         /// <summary>
-        /// NavigationBar control.
+        /// NavigationBarButtons control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl NavigationBar;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl NavigationBarButtons;
+        
+        /// <summary>
+        /// menu1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menu1;
+        
+        /// <summary>
+        /// menu2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menu2;
+        
+        /// <summary>
+        /// menu3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menu3;
+        
+        /// <summary>
+        /// menu4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor menu4;
         
         /// <summary>
         /// submenu control.
