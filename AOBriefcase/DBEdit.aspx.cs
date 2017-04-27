@@ -49,13 +49,13 @@ namespace AOBriefcase
         /// <param name="e"></param>
         protected void ChangeSelectedIndex(object sender, EventArgs e)
         {            
-            int viewPage = GridView1.PageIndex * 10;
-            DetailsView1.Visible = true;
-            int viewIndex = GridView1.SelectedIndex;
-            int DetailIndex = viewPage + viewIndex;
-            DetailsView1.PageIndex = DetailIndex;
+            //int viewPage = GridView1.PageIndex * 10;            
+            //int viewIndex = GridView1.SelectedIndex;
+            //int DetailIndex = viewPage + viewIndex;
+            //DetailsView1.PageIndex = DetailIndex;
             
             StatusLabel1.Visible = true;
+            DetailsView1.Visible = true;
             btnEditCred.Visible = true;
             btnEditClose.Visible = true;
             GridView1.Visible = false;
