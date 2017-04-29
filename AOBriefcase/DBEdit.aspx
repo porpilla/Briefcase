@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="DBEdit.css" type="text/css"/>    
 </asp:Content>
 
-
 <asp:Content ID="submenuview" ContentPlaceHolderID="submenu" runat="server">
+
     <div id="subNavigationBar">
         <br />
         <h3 id="DBE"><span style="color:#D4B47C">D</span>ata<span style="color:#D4B47C">B</span>ase <br /> <span style="color:#D4B47C">E</span>ditor</h3>
@@ -19,24 +19,26 @@
             Orientation="Vertical"
             OnMenuItemClick="subNavi_MenuItem_Click"
             IncludeStyleBlock="true"
-            ItemWrap="true"
-            CssClass="submenutestcss"
+            ItemWrap="false"
+            CssClass="subMenuNavi"
+	        StaticSelectedStyle-CssClass="subMenuNavi_Selected"
             >
 
             <Items>
                 <asp:MenuItem Text="Configure Contracts" Selected="true" />
                 <asp:MenuItem Text="Configure Providers" />
-                <asp:MenuItem Text="Configure Billing Users" />
+                <asp:MenuItem Text="Configure Billing Users" Selectable="false" Tooltip="Feature is not yet implemented"/>
                 <asp:MenuItem Text="Configure Attachments" />
             </Items>
 
         </asp:Menu>
 
     </div>
+
 </asp:Content>
 
 <asp:Content ID="stuff_2" ContentPlaceHolderID="MainContent" runat="server">
-
+    <div id="editSpace">
     <div id="editHeaders" runat="server" class="editHeaders">
         <asp:LoginView ID="LoginView1" runat="server">
             <AnonymousTemplate>
@@ -46,9 +48,13 @@
                 Administration account authenticated. Access to contract editors enabled.
             </LoggedInTemplate>
         </asp:LoginView>
-        <br />        
-        <h2>You have entered the contract configuration module. Please be very careful here.</h2>
-    </div>
+        <br />
+        Welcome
+        <asp:LoginName ID="LoginName2" runat="server" Font-Bold ="true" />                        
+        <asp:LoginStatus ID="LoginStatus2" runat="server" />        
+        <h2>You have entered the Contract Configuration module. Please be very careful here.</h2>
+        <h4>Add or edit AO Contracts in this screen. Deleting contracts is not recommended.</h4>
+        </div>
     
     <div id="editToggles" >
         <asp:Label ID="StatusLabel1" ForeColor="Red" runat="server" Visible="false" AutoPostBack="true"/>
@@ -165,6 +171,7 @@
                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("Contract_PDF") %>'></asp:Label>                        
                     </ItemTemplate>
                 </asp:TemplateField>
+		<asp:BoundField DataField="Billing_PDF" HeaderText="Billing_PDF" SortExpression="Billing_PDF" />
                 <asp:BoundField DataField="SVC_Injectibles" HeaderText="SVC_Injectibles" SortExpression="SVC_Injectibles" />
                 <asp:CheckBoxField DataField="SVC_Injections" HeaderText="SVC_Injections" SortExpression="SVC_Injections" />                
                 <asp:CheckBoxField DataField="SVC_OfficeVisits" HeaderText="SVC_OfficeVisits" SortExpression="SVC_OfficeVisits" />
@@ -228,18 +235,20 @@
                 <asp:BoundField DataField="ContractID" HeaderText="ContractID" SortExpression="ContractID" ReadOnly="True" Visible="false"/>
                 <asp:BoundField DataField="Credentialing_Status" HeaderText="Credentialing_Status" SortExpression="Credentialing_Status" />
                 <asp:BoundField DataField="Credentialing_EffectiveDate" HeaderText="Credentialing_EffectiveDate" SortExpression="Credentialing_EffectiveDate" />                
+		<asp:BoundField DataField="Credentialing_Comment" HeaderText="Credentialing_Comment" SortExpression="Credentialing_Comment" />
             </Columns>
         </asp:GridView>
         <asp:SqlDataSource 
             ID="SqlDataSource2" 
             runat="server" 
             ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-            SelectCommand="SELECT ProviderContract_junction.ProviderID, ProviderContract_junction.ContractID, ProviderContract_junction.Credentialing_Status, ProviderContract_junction.Credentialing_EffectiveDate, ProviderList.Provider_FullName FROM ProviderContract_junction INNER JOIN ProviderList ON ProviderContract_junction.ProviderID = ProviderList.ProviderListID WHERE (ProviderContract_junction.ContractID = @ContractID) ORDER BY ProviderContract_junction.ProviderID DESC"
-            UpdateCommand="UPDATE [ProviderContract_junction] SET [Credentialing_Status] = @Credentialing_Status, [Credentialing_EffectiveDate] = @Credentialing_EffectiveDate WHERE [ContractID] = @ContractID AND [ProviderID] = @ProviderID"
+            SelectCommand="SELECT ProviderContract_junction.ProviderID, ProviderContract_junction.ContractID, ProviderContract_junction.Credentialing_Status, ProviderContract_junction.Credentialing_EffectiveDate, ProviderContract_junction.Credentialing_Comment, ProviderList.Provider_FullName FROM ProviderContract_junction INNER JOIN ProviderList ON ProviderContract_junction.ProviderID = ProviderList.ProviderListID WHERE (ProviderContract_junction.ContractID = @ContractID) AND (ProviderList.Provider_Status = 1) ORDER BY ProviderContract_junction.ProviderID DESC"
+            UpdateCommand="UPDATE [ProviderContract_junction] SET [Credentialing_Status] = @Credentialing_Status, [Credentialing_EffectiveDate] = @Credentialing_EffectiveDate, [Credentialing_Comment] = @Credentialing_Comment WHERE [ContractID] = @ContractID AND [ProviderID] = @ProviderID"
             >
             <UpdateParameters>
                 <asp:Parameter Name="Credentialing_Status" Type="String" />
     	        <asp:Parameter DbType="Date" Name="Credentialing_EffectiveDate" />
+		<asp:Parameter Name="Credentialing_Comment" Type="String" />
 	            <asp:Parameter Name="ContractID" Type="Int32" />
 	            <asp:Parameter Name="ProviderID" Type="Int32" />
             </UpdateParameters>
@@ -253,7 +262,7 @@
             AllowPaging="True" 
             AutoGenerateColumns="False" 
             DataKeyNames="ContractID" 
-            DataSourceID="OmniRead" 
+            DataSourceID="SqlDataSource1" 
             OnSelectedIndexChanged="ChangeSelectedIndex"            
             HeaderStyle-Backcolor="#2b4b83"
             HeaderStyle-Forecolor="White" 
@@ -283,7 +292,8 @@
                 <asp:BoundField DataField="Contract_Status" HeaderText="Contract_Status" SortExpression="Contract_Status" />
                 <asp:BoundField DataField="Contract_Homepage" HeaderText="Contract_Homepage" SortExpression="Contract_Homepage" />
                 <asp:BoundField DataField="Contract_Phone" HeaderText="Contract_Phone" SortExpression="Contract_Phone" />
-                <asp:BoundField DataField="Contract_PDF" HeaderText="Contract_PDF" SortExpression="Contract_PDF" />                
+                <asp:BoundField DataField="Contract_PDF" HeaderText="Contract_PDF" SortExpression="Contract_PDF" />
+		<asp:BoundField DataField="Billing_PDF" HeaderText="Billing_PDF" SortExpression="Billing_PDF" />                
                 <asp:BoundField DataField="SVC_Injectibles" HeaderText="SVC_Injectibles" SortExpression="SVC_Injectibles" />
                 <asp:CheckBoxField DataField="SVC_Injections" HeaderText="SVC_Injections" SortExpression="SVC_Injections" />
                 <asp:BoundField DataField="Contract_Alias4" HeaderText="Contract_Alias4" SortExpression="Contract_Alias4" />
@@ -318,27 +328,16 @@
             </Columns>
         </asp:GridView>
         
-        <asp:SqlDataSource
-            ID="OmniRead"
-            runat="server"
-            ConnectionString="<%$ ConnectionStrings:DemographicsConnectionString %>"
-            SelectCommand="SELECT * FROM [Contract_Demographics]"
-            >
-        </asp:SqlDataSource>
-
-
+</div>
         <asp:SqlDataSource 
             ID="SqlDataSource1" 
             runat="server" 
             ConnectionString="<%$ ConnectionStrings:DemographicsConnectionString %>" 
             DeleteCommand="DELETE FROM [Contract_Demographics] WHERE [ContractID] = @ContractID" 
-            InsertCommand="INSERT INTO [Contract_Demographics] ([AOID], [Amend_Count], [Amend_Comment], [Contract_Name], [Contract_Type], [Contract_Parent], [Contract_FC], [Contract_Alias3], [Contract_Alias2], [Contract_Alias1], [Contract_UpdateDate], [Contract_TerminateDate], [Contract_EffectiveDate], [Contract_Status], [Contract_Homepage], [Contract_Phone], [Contract_PDF], [Auth_ProviderPortal], [SVC_Injectibles], [SVC_Injections], [Contract_Alias4], [SVC_OfficeVisits], [SVC_SX], [SVC_Radiology], [SVC_OT], [SVC_PT], [SVC_PainMgmt], [SVC_Podiatry], [SVC_DME], [Auth_OfficeVisits], [Auth_OfficeVisits_Note], [Auth_SX], [Auth_SX_Note], [Auth_Radiology], [Auth_Radiology_Note], [Auth_PT], [Auth_PT_Note], [Auth_OT], [Auth_OT_Note], [Auth_PainMgmt], [Auth_PainMgmt_Note], [Auth_DME], [Auth_DME_Note], [Auth_Podiatry], [Auth_Podiatry_Note], [Auth_Injections], [Auth_Injections_Note]) VALUES (@AOID, @Amend_Count, @Amend_Comment, @Contract_Name, @Contract_Type, @Contract_Parent, @Contract_FC, @Contract_Alias3, @Contract_Alias2, @Contract_Alias1, @Contract_UpdateDate, @Contract_TerminateDate, @Contract_EffectiveDate, @Contract_Status, @Contract_Homepage, @Contract_Phone, @Contract_PDF, @Auth_ProviderPortal, @SVC_Injectibles, @SVC_Injections, @Contract_Alias4, @SVC_OfficeVisits, @SVC_SX, @SVC_Radiology, @SVC_OT, @SVC_PT, @SVC_PainMgmt, @SVC_Podiatry, @SVC_DME, @Auth_OfficeVisits, @Auth_OfficeVisits_Note, @Auth_SX, @Auth_SX_Note, @Auth_Radiology, @Auth_Radiology_Note, @Auth_PT, @Auth_PT_Note, @Auth_OT, @Auth_OT_Note, @Auth_PainMgmt, @Auth_PainMgmt_Note, @Auth_DME, @Auth_DME_Note, @Auth_Podiatry, @Auth_Podiatry_Note, @Auth_Injections, @Auth_Injections_Note)" 
-            SelectCommand="SELECT [ContractID], [AOID], [Amend_Count], [Amend_Comment], [Contract_Name], [Contract_Type], [Contract_Parent], [Contract_FC], [Contract_Alias3], [Contract_Alias2], [Contract_Alias1], [Contract_UpdateDate], [Contract_TerminateDate], [Contract_EffectiveDate], [Contract_Status], [Contract_Homepage], [Contract_Phone], [Contract_PDF], [Auth_ProviderPortal], [SVC_Injectibles], [SVC_Injections], [Contract_Alias4], [SVC_OfficeVisits], [SVC_SX], [SVC_Radiology], [SVC_OT], [SVC_PT], [SVC_PainMgmt], [SVC_Podiatry], [SVC_DME], [Auth_OfficeVisits], [Auth_OfficeVisits_Note], [Auth_SX], [Auth_SX_Note], [Auth_Radiology], [Auth_Radiology_Note], [Auth_PT], [Auth_PT_Note], [Auth_OT], [Auth_OT_Note], [Auth_PainMgmt], [Auth_PainMgmt_Note], [Auth_DME], [Auth_DME_Note], [Auth_Podiatry], [Auth_Podiatry_Note], [Auth_Injections], [Auth_Injections_Note] FROM [Contract_Demographics] WHERE ContractID=@ContractID ORDER BY [AOID], [Amend_Count]" 
-            UpdateCommand="UPDATE [Contract_Demographics] SET [AOID] = @AOID, [Amend_Count] = @Amend_Count, [Amend_Comment] = @Amend_Comment, [Contract_Name] = @Contract_Name, [Contract_Type] = @Contract_Type, [Contract_Parent] = @Contract_Parent, [Contract_FC] = @Contract_FC, [Contract_Alias3] = @Contract_Alias3, [Contract_Alias2] = @Contract_Alias2, [Contract_Alias1] = @Contract_Alias1, [Contract_UpdateDate] = @Contract_UpdateDate, [Contract_TerminateDate] = @Contract_TerminateDate, [Contract_EffectiveDate] = @Contract_EffectiveDate, [Contract_Status] = @Contract_Status, [Contract_Homepage] = @Contract_Homepage, [Contract_Phone] = @Contract_Phone, [Contract_PDF] = @Contract_PDF, [Auth_ProviderPortal] = @Auth_ProviderPortal, [SVC_Injectibles] = @SVC_Injectibles, [SVC_Injections] = @SVC_Injections, [Contract_Alias4] = @Contract_Alias4, [SVC_OfficeVisits] = @SVC_OfficeVisits, [SVC_SX] = @SVC_SX, [SVC_Radiology] = @SVC_Radiology, [SVC_OT] = @SVC_OT, [SVC_PT] = @SVC_PT, [SVC_PainMgmt] = @SVC_PainMgmt, [SVC_Podiatry] = @SVC_Podiatry, [SVC_DME] = @SVC_DME, [Auth_OfficeVisits] = @Auth_OfficeVisits, [Auth_OfficeVisits_Note] = @Auth_OfficeVisits_Note, [Auth_SX] = @Auth_SX, [Auth_SX_Note] = @Auth_SX_Note, [Auth_Radiology] = @Auth_Radiology, [Auth_Radiology_Note] = @Auth_Radiology_Note, [Auth_PT] = @Auth_PT, [Auth_PT_Note] = @Auth_PT_Note, [Auth_OT] = @Auth_OT, [Auth_OT_Note] = @Auth_OT_Note, [Auth_PainMgmt] = @Auth_PainMgmt, [Auth_PainMgmt_Note] = @Auth_PainMgmt_Note, [Auth_DME] = @Auth_DME, [Auth_DME_Note] = @Auth_DME_Note, [Auth_Podiatry] = @Auth_Podiatry, [Auth_Podiatry_Note] = @Auth_Podiatry_Note, [Auth_Injections] = @Auth_Injections, [Auth_Injections_Note] = @Auth_Injections_Note WHERE [ContractID] = @ContractID"
+            InsertCommand="INSERT INTO [Contract_Demographics] ([AOID], [Amend_Count], [Amend_Comment], [Contract_Name], [Contract_Type], [Contract_Parent], [Contract_FC], [Contract_Alias3], [Contract_Alias2], [Contract_Alias1], [Contract_UpdateDate], [Contract_TerminateDate], [Contract_EffectiveDate], [Contract_Status], [Contract_Homepage], [Contract_Phone], [Contract_PDF], [Billing_PDF], [Auth_ProviderPortal], [SVC_Injectibles], [SVC_Injections], [Contract_Alias4], [SVC_OfficeVisits], [SVC_SX], [SVC_Radiology], [SVC_OT], [SVC_PT], [SVC_PainMgmt], [SVC_Podiatry], [SVC_DME], [Auth_OfficeVisits], [Auth_OfficeVisits_Note], [Auth_SX], [Auth_SX_Note], [Auth_Radiology], [Auth_Radiology_Note], [Auth_PT], [Auth_PT_Note], [Auth_OT], [Auth_OT_Note], [Auth_PainMgmt], [Auth_PainMgmt_Note], [Auth_DME], [Auth_DME_Note], [Auth_Podiatry], [Auth_Podiatry_Note], [Auth_Injections], [Auth_Injections_Note]) VALUES (@AOID, @Amend_Count, @Amend_Comment, @Contract_Name, @Contract_Type, @Contract_Parent, @Contract_FC, @Contract_Alias3, @Contract_Alias2, @Contract_Alias1, @Contract_UpdateDate, @Contract_TerminateDate, @Contract_EffectiveDate, @Contract_Status, @Contract_Homepage, @Contract_Phone, @Contract_PDF, @Billing_PDF, @Auth_ProviderPortal, @SVC_Injectibles, @SVC_Injections, @Contract_Alias4, @SVC_OfficeVisits, @SVC_SX, @SVC_Radiology, @SVC_OT, @SVC_PT, @SVC_PainMgmt, @SVC_Podiatry, @SVC_DME, @Auth_OfficeVisits, @Auth_OfficeVisits_Note, @Auth_SX, @Auth_SX_Note, @Auth_Radiology, @Auth_Radiology_Note, @Auth_PT, @Auth_PT_Note, @Auth_OT, @Auth_OT_Note, @Auth_PainMgmt, @Auth_PainMgmt_Note, @Auth_DME, @Auth_DME_Note, @Auth_Podiatry, @Auth_Podiatry_Note, @Auth_Injections, @Auth_Injections_Note)" 
+            SelectCommand="SELECT [ContractID], [AOID], [Amend_Count], [Amend_Comment], [Contract_Name], [Contract_Type], [Contract_Parent], [Contract_FC], [Contract_Alias3], [Contract_Alias2], [Contract_Alias1], [Contract_UpdateDate], [Contract_TerminateDate], [Contract_EffectiveDate], [Contract_Status], [Contract_Homepage], [Contract_Phone], [Contract_PDF], [Billing_PDF], [Auth_ProviderPortal], [SVC_Injectibles], [SVC_Injections], [Contract_Alias4], [SVC_OfficeVisits], [SVC_SX], [SVC_Radiology], [SVC_OT], [SVC_PT], [SVC_PainMgmt], [SVC_Podiatry], [SVC_DME], [Auth_OfficeVisits], [Auth_OfficeVisits_Note], [Auth_SX], [Auth_SX_Note], [Auth_Radiology], [Auth_Radiology_Note], [Auth_PT], [Auth_PT_Note], [Auth_OT], [Auth_OT_Note], [Auth_PainMgmt], [Auth_PainMgmt_Note], [Auth_DME], [Auth_DME_Note], [Auth_Podiatry], [Auth_Podiatry_Note], [Auth_Injections], [Auth_Injections_Note] FROM [Contract_Demographics] ORDER BY [AOID], [Amend_Count]" 
+            UpdateCommand="UPDATE [Contract_Demographics] SET [AOID] = @AOID, [Amend_Count] = @Amend_Count, [Amend_Comment] = @Amend_Comment, [Contract_Name] = @Contract_Name, [Contract_Type] = @Contract_Type, [Contract_Parent] = @Contract_Parent, [Contract_FC] = @Contract_FC, [Contract_Alias3] = @Contract_Alias3, [Contract_Alias2] = @Contract_Alias2, [Contract_Alias1] = @Contract_Alias1, [Contract_UpdateDate] = @Contract_UpdateDate, [Contract_TerminateDate] = @Contract_TerminateDate, [Contract_EffectiveDate] = @Contract_EffectiveDate, [Contract_Status] = @Contract_Status, [Contract_Homepage] = @Contract_Homepage, [Contract_Phone] = @Contract_Phone, [Contract_PDF] = @Contract_PDF, [Billing_PDF] = @Billing_PDF, [Auth_ProviderPortal] = @Auth_ProviderPortal, [SVC_Injectibles] = @SVC_Injectibles, [SVC_Injections] = @SVC_Injections, [Contract_Alias4] = @Contract_Alias4, [SVC_OfficeVisits] = @SVC_OfficeVisits, [SVC_SX] = @SVC_SX, [SVC_Radiology] = @SVC_Radiology, [SVC_OT] = @SVC_OT, [SVC_PT] = @SVC_PT, [SVC_PainMgmt] = @SVC_PainMgmt, [SVC_Podiatry] = @SVC_Podiatry, [SVC_DME] = @SVC_DME, [Auth_OfficeVisits] = @Auth_OfficeVisits, [Auth_OfficeVisits_Note] = @Auth_OfficeVisits_Note, [Auth_SX] = @Auth_SX, [Auth_SX_Note] = @Auth_SX_Note, [Auth_Radiology] = @Auth_Radiology, [Auth_Radiology_Note] = @Auth_Radiology_Note, [Auth_PT] = @Auth_PT, [Auth_PT_Note] = @Auth_PT_Note, [Auth_OT] = @Auth_OT, [Auth_OT_Note] = @Auth_OT_Note, [Auth_PainMgmt] = @Auth_PainMgmt, [Auth_PainMgmt_Note] = @Auth_PainMgmt_Note, [Auth_DME] = @Auth_DME, [Auth_DME_Note] = @Auth_DME_Note, [Auth_Podiatry] = @Auth_Podiatry, [Auth_Podiatry_Note] = @Auth_Podiatry_Note, [Auth_Injections] = @Auth_Injections, [Auth_Injections_Note] = @Auth_Injections_Note WHERE [ContractID] = @ContractID"
             >
-            <SelectParameters>
-                <asp:ControlParameter Name="ContractID" ControlID="GridView1" Propertyname="SelectedValue"/>
-            </SelectParameters>
             <DeleteParameters>
                 <asp:Parameter Name="ContractID" Type="Int32" />
             </DeleteParameters>
@@ -359,7 +358,8 @@
                 <asp:Parameter Name="Contract_Status" Type="String" />
                 <asp:Parameter Name="Contract_Homepage" Type="String" />
                 <asp:Parameter Name="Contract_Phone" Type="String" />
-                <asp:Parameter Name="Contract_PDF" Type="Int32" />                
+                <asp:Parameter Name="Contract_PDF" Type="Int32" /> 
+		<asp:Parameter Name="Billing_PDF" Type="Int32" />               
                 <asp:Parameter Name="SVC_Injectibles" Type="String" />
                 <asp:Parameter Name="SVC_Injections" Type="Boolean" />
                 <asp:Parameter Name="Contract_Alias4" Type="String" />
@@ -409,7 +409,8 @@
                 <asp:Parameter Name="Contract_Status" Type="String" />
                 <asp:Parameter Name="Contract_Homepage" Type="String" />
                 <asp:Parameter Name="Contract_Phone" Type="String" />
-                <asp:Parameter Name="Contract_PDF" Type="Int32" />                
+                <asp:Parameter Name="Contract_PDF" Type="Int32" />
+		<asp:Parameter Name="Billing_PDF" Type="Int32" />                
                 <asp:Parameter Name="SVC_Injectibles" Type="String" />
                 <asp:Parameter Name="SVC_Injections" Type="Boolean" />
                 <asp:Parameter Name="Contract_Alias4" Type="String" />

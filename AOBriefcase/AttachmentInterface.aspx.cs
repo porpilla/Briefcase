@@ -8,6 +8,7 @@ using System.IO;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Web.Security;
 
 namespace AOBriefcase
 {
@@ -15,9 +16,13 @@ namespace AOBriefcase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!this.Page.User.Identity.IsAuthenticated)
+            {
+                FormsAuthentication.RedirectToLoginPage();
+            }
         }
 
+        
         protected void btnAuthUpload_Click(object sender, EventArgs e)
         {
             if (AuthUpload1.HasFile)
@@ -84,8 +89,11 @@ namespace AOBriefcase
             }
 
             int referenceIndex = GridView1.SelectedIndex;
-            string guidIndex = GridView1.DataKeys[referenceIndex].Value.ToString();
-            selectionInfo.Text = "You will be uploading attachments to: " + guidIndex;
+            string aoidIndex = GridView1.DataKeys[referenceIndex].Values[0].ToString();
+            string amendNoIndex = GridView1.DataKeys[referenceIndex].Values[1].ToString();
+            string aoCodeIndex = "[" + aoidIndex + "." + amendNoIndex + "]";
+
+            selectionInfo.Text = "You will be uploading attachments to: " + aoCodeIndex;
         }
 
         // In order for file deletion methods to work, NETWORK SERVICES user must be enabled on /Attachments directory
@@ -110,7 +118,7 @@ namespace AOBriefcase
             SqlConnection sqlcon = new SqlConnection(GetConnection());
 
             int referenceIndex = GridView1.SelectedIndex;
-            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Value.ToString());
+            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Values[2].ToString());
 
             try
             {
@@ -151,7 +159,7 @@ namespace AOBriefcase
             SqlConnection sqlcon = new SqlConnection(GetConnection());
 
             int referenceIndex = GridView1.SelectedIndex;
-            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Value.ToString());
+            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Values[2].ToString());
 
             try
             {
@@ -192,7 +200,7 @@ namespace AOBriefcase
             SqlConnection sqlcon = new SqlConnection(GetConnection());
 
             int referenceIndex = GridView1.SelectedIndex;
-            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Value.ToString());
+            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Values[2].ToString());
 
             try
             {
@@ -224,7 +232,7 @@ namespace AOBriefcase
             SqlConnection sqlcon = new SqlConnection(GetConnection());
 
             int referenceIndex = GridView1.SelectedIndex;
-            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Value.ToString());
+            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Values[2].ToString());
 
             try
             {
@@ -256,7 +264,7 @@ namespace AOBriefcase
             SqlConnection sqlcon = new SqlConnection(GetConnection());
 
             int referenceIndex = GridView1.SelectedIndex;
-            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Value.ToString());
+            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Values[2].ToString());
 
             try
             {
@@ -289,7 +297,7 @@ namespace AOBriefcase
             SqlConnection sqlcon = new SqlConnection(GetConnection());
 
             int referenceIndex = GridView1.SelectedIndex;
-            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Value.ToString());
+            Guid guidIndex = Guid.Parse(GridView1.DataKeys[referenceIndex].Values[2].ToString());
 
             try
             {
@@ -323,6 +331,42 @@ namespace AOBriefcase
             return System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         }
 
+        protected void btnSub1_Click()
+        {
+            Response.Redirect("~/DBEdit.aspx");
+        }
+        protected void btnSub2_Click()
+        {
+            Response.Redirect("~/ProviderEdit.aspx");
+        }
+        protected void btnSub3_Click()
+        {
+            Response.Redirect("~/UserRegistry.aspx");
+        }
+        protected void btnSub4_Click()
+        {
+            Response.Redirect("~/AttachmentInterface.aspx");
+        }
+
+        protected void subNavi_MenuItem_Click(object sender, MenuEventArgs e)
+        {
+            if (e.Item.Text == "Configure Contracts")
+            {
+                btnSub1_Click();
+            }
+            if (e.Item.Text == "Configure Providers")
+            {
+                btnSub2_Click();
+            }
+            if (e.Item.Text == "Configure Billing Users")
+            {
+                btnSub3_Click();
+            }
+            if (e.Item.Text == "Configure Attachments")
+            {
+                btnSub4_Click();
+            }
+        }
     }
 
 

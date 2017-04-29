@@ -1,9 +1,89 @@
-﻿body {
-    font-family:Arial, Helvetica, sans-serif;
+﻿body{
+    font-family:Arial, Arial, Helvetica, sans-serif;
 }
 
 h2{
-    color:#2b4b83;    
+    font-size:1.4em;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#888889;
+    background-color:transparent;
+    width:auto;
+    right:30px;        
+}
+
+h3{
+    font-size:1.5em;
+    color:#ffffff;
+    padding-left:5px;
+    display:block;
+}
+
+.editHeaders{    
+}
+
+#editToggles{    
+}
+
+#DBE{
+    right:5px;
+}
+
+#editSpace{
+	position:relative;
+}
+
+#subNavigationBar{
+    margin-left:5px;
+    background-color:#2b4b83;
+    z-index:1;
+    height:100%;    
+/*    width:161px;*/
+}
+
+.subMenuNavi{
+    background:white;
+    margin-left:4px;
+	width:200px;
+}
+
+.subMenuNavi a{
+    color:#2b4b83;
+    background:white;
+    padding-right:9px;
+    padding-left:5px;
+    margin-left:5px;    
+}
+
+.subMenuNavi_Selected{
+	background:#2b4b83;
+	border:solid;
+	border-color:white;
+}
+
+.subMenuNavi_Selected a{
+    color:white;
+    background:#2b4b83;
+    border:solid;
+    font-weight:bold;            
+}
+
+.subMenuNavi td:hover{
+	background:#2b4b83;
+	text-decoration:underline;
+	font-weight:bold;
+}
+
+.subMenuNavi a:hover{
+	color:white;
+	background:#2b4b83;
+}
+
+#submenuview{
+    position:fixed;
+    margin-top:0px;
+    width:180px;
+    background-color:#353535;
+    z-index=0;
 }
 
 .viewer{
@@ -18,12 +98,18 @@ h2{
     background-color:#2b4b83;
     font-weight:bold;
     color:white;
+    text-align:center;
 }
 
 .viewer .detailheader {
     font-weight:normal;    
     background-color:#2b4b83;
     color:white;
+}
+
+.viewer .detailheader td{
+	color:white;
+	font-weight:bold;
 }
 .viewer .detailfieldheader{
     width:35%;

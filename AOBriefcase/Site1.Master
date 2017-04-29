@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/x-icon" href="~/Images/favicon.ico" runat="server"/>
     <link rel="icon" type="image/ico" href="~/Images/favicon.ico" runat="server"/>
-    <link rel="stylesheet" href="Site1.css" type="text/css" />
+    <link rel="stylesheet" href="Site1.css" type="text/css" runat="server"/>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -31,15 +31,23 @@
                 <asp:LoginStatus ID="LoginStatus2" runat="server" />
             </div>
 
-            <div id="NavigationBar">
+            <div id="NavigationBar" class="NavigationBar">
                 <h2 id="CRD"><span style="color:#79b9ef">C</span>ontract <span style="color:#79b9ef">R</span>eference <span style="color:#79b9ef">D</span>atabase</h2>      
                 <div id="NavigationBarButtons" runat="server">
-                    <a runat="server" id="menu1" href="/disclaimer.aspx">Home</a>
-                    <a runat="server" id="menu2" href="/WebForm1.aspx">Search for a Contract</a>
-                    <a runat="server" id="menu3" href="/DBEdit.aspx">Edit Contracts</a>
-                    <a runat="server" id="menu4" href="/Contacts.aspx">Contact</a>
+                    <a runat="server" href="~/disclaimer.aspx">Home</a>
+                    <a runat="server" href="~/WebForm1.aspx">Search for a Contract</a>
+                    <a runat="server" href="~/DBEdit.aspx">Edit Contracts</a>
+                    <a runat="server" href="~/Contacts.aspx">Contact</a>
                 </div>
-                
+
+                <%--<asp:Menu ID="Navi" runat="server" EnableViewState="false" Orientation="Horizontal">
+                    <Items>
+                        <asp:MenuItem NavigateUrl="~/disclaimer.aspx" Text="Home" />
+                        <asp:MenuItem NavigateUrl="~/WebForm1.aspx" Text="Search for a Contract" />
+                        <asp:MenuItem NavigateUrl="~/DBEdit.aspx" Text="Edit Contracts" />
+                        <asp:MenuItem NavigateUrl="~/Contact.aspx" Text="Contact" />
+                    </Items>
+                </asp:Menu>--%>
             <br />
             </div>
         </div>

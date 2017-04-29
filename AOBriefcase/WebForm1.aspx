@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="WebForm1.css" type="text/css"/>
 </asp:Content>
 
+<asp:Content ID="submenuview" ContentPlaceHolderID="submenu" runat="server">
+
+    <div id="subNavigationBar">
+        <br />
+        <h3 id="CS"><span style="color:#D4B47C">C</span>ontract <br /> <span style="color:#D4B47C">S</span>earch</h3>
+    </div>
+
+</asp:Content>
+
 <asp:Content ID="stuff_2" ContentPlaceHolderID="MainContent" runat="server">
 
     <h3><b>This tool is to help determine if we are contracted with a patient's particular insurance. Please enter all or a portion of the insurance name. You may also enter a known abbreviated name for the insurance (ie. BMG for Beaver Medical Group)</b></h3>

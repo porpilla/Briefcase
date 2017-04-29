@@ -1,5 +1,299 @@
-﻿
+﻿body {
+    font-family:Arial, Helvetica, sans-serif;    
+}
 
-#stuff_2{
+h2{
+    font-size:1.4em;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#888889;
+    background-color:transparent;
+    width: auto;
+    right: 30px;
+}
 
+h3{
+    font-size:1.5em;
+    color:#ffffff;
+    padding-left:5px;
+}
+
+div{
+    font-family:Arial, Helvetica, sans-serif;
+}
+dl{
+    width:300px;
+    margin:0;
+}
+dl dt{
+    float:left;
+    width:400px;
+    text-decoration: underline;
+}
+dl dt dd{
+    float:left;
+    width:200px;
+    font-weight: bold;
+    text-decoration:underline;
+}
+.btnSubMenu {
+    /*background: transparent url(/Images/btnSubMenu.gif) no-repeat scroll top right;*/        
+    /*width:240px;
+    height:30px;*/
+    display: block;
+    float: left;
+    margin-right: 8px;    
+    /*height: 28px;
+    margin-right: 6px;*/
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+    font-family: Arial,Helventica,sans-serif;
+    font-size: 1.08em;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    padding-left:16px;
+    padding-right:16px;
+}
+
+#btnSub1:active{
+    background-position: bottom right;
+}
+
+#btnSub1{
+	display:block;
+    overflow:hidden;
+    background: transparent url(/Images/buttonSubMenu-short.gif) no-repeat top right;
+    background-size: cover;
+	overflow:hidden;
+	float:left;
+	font: bold .80em Arial;
+	color:#FFFFFF;
+	text-transform:uppercase;
+	text-decoration:none;
+	text-align:center;
+	line-height:35px;
+    background-position: bottom left;    
+}
+
+#btnSub2{
+    display:block;
+    overflow:hidden;
+    background: transparent url(/Images/buttonSubMenu-mid.gif) no-repeat scroll top right;
+    background-size: cover;
+	overflow:hidden;
+	float:left;
+	font: bold .80em Arial;
+	color:#FFFFFF;
+	text-transform:uppercase;
+	text-decoration:none;
+	text-align:center;
+	line-height:35px;    
+}
+
+#btnSub3{
+    display:block;
+    overflow:hidden;
+    background: transparent url(/Images/buttonSubMenu-mid.gif) no-repeat scroll top right;
+    background-size: cover;
+	overflow:hidden;
+	float:left;
+	font: bold .80em Arial;
+	color:#FFFFFF;
+	text-transform:uppercase;
+	text-decoration:none;
+	text-align:center;
+	line-height:35px;    
+}
+
+#btnSub4{
+    display:block;
+    overflow:hidden;
+    background: transparent url(/Images/buttonSubMenu-mid.gif) no-repeat scroll top right;
+    background-size: cover;
+	overflow:hidden;
+	float:left;
+	font: bold .80em Arial;
+	color:#FFFFFF;
+	text-transform:uppercase;
+	text-decoration:none;
+	text-align:center;
+	line-height:35px;    
+}
+
+#AOLogo{
+    position: relative;
+    width: 350px;
+    height: auto;
+    margin: 10px 0px;
+}
+
+#CI{    
+    right: 5px;
+}
+
+/*#NavigationBar{
+    position: relative;
+    height: 60px;
+    background-color: #353535;
+}*/
+
+#infoSpace{
+	position:relative;	
+}
+
+
+#Navi ul li{
+    position: relative;
+    top: 15px;
+    border-radius:0px;
+    height: 45px;
+    width: 200px;
+    font-family:Arial, Helvetica, sans-serif;
+    text-align:center;    
+    padding:15px 12px;
+    margin: 0;
+    background-color: #25477d;
+    background-repeat: no-repeat;    
+}
+
+#Navi ul li a{
+    color:white;
+    font-weight:bold;
+}
+
+#NavigationBar ul li a.highlight:hover{
+    /*font-weight:bold;*/
+    color: aliceblue;
+    text-decoration:underline;
+    cursor: pointer;
+}
+
+#subNavigationBar{    
+    margin-left:5px;
+    background-color:#2b4b83;    
+    z-index:1;
+    height:100%;
+/*    height:250px;*/
+}
+
+.subMenuNavi{
+    background:white;
+    margin-left:4px;
+	width:215px;
+}
+
+.subMenuNavi a{
+    color:#2b4b83;
+    background:white;
+    padding-right:9px;
+    padding-left:5px;
+    margin-left:5px;    
+}
+
+.subMenuNavi_Selected{
+	background:#2b4b83;
+	border:solid;
+	border-color:white;
+}
+
+.subMenuNavi_Selected a{
+    color:white;
+    background:#2b4b83;
+    border:solid;
+    font-weight:bold;            
+}
+
+.subMenuNavi td:hover{
+	background:#2b4b83;
+	text-decoration:underline;
+	font-weight:bold;
+}
+
+.subMenuNavi a:hover{
+	color:white;
+	background:#2b4b83;
+}
+/*#subNavi ul li{        
+    position: relative;
+    top: 15px;
+    border-radius:0px;
+    height: 55px;    
+    font-family:Arial, Helvetica, sans-serif;
+    text-align:center;            
+    margin: 0;
+    background-color: #25477d;
+    background-repeat: no-repeat;     
+    display:table-cell;
+    vertical-align:middle;  
+}*/
+
+/*#subNavi ul li a{
+    color:white;
+    font-weight:bold;
+    height:inherit;
+    display:table-cell;
+    vertical-align:middle;
+}*/
+
+/*#subNavi ul li a.highlight:hover{    
+    color: aliceblue;
+    text-decoration:underline;
+    cursor: pointer;
+}*/
+
+/*#subNavi ul li.static.selected{
+    background-color: black;
+}*/
+/*#subNavi a.static.selected{
+    color:#25477d;    
+    background-color:white;
+    height:inherit;
+    border:double;
+}*/
+/*.submenutestcss ul li.static.selected{    
+    color:white !important;
+    background-color:white !important;
+}*/
+/*.submenutestcss{
+    display:table-cell;
+    vertical-align:middle;
+}*/
+#submenuview {
+    position:fixed;
+    margin-top:0px;    
+    width:180px;
+    background-color:#353535;
+    z-index:0;    
+}
+
+.viewer{
+    width:80%;
+    background-color:#fff;
+    margin:1px 0 10px 0;    
+    border:solid 1px #525252;    
+    border-collapse:collapse;
+    text-wrap:avoid;
+    z-index:2;
+}
+.viewer .detailheader td{
+    font-weight:bold;
+    background-color:#2b4b83;
+    color:white;
+}
+.viewer .detailfieldheader{
+    width:35%;    
+}
+.viewer td{
+    padding:10px;
+    border:solid 1px #c1c1c1;
+    color:#717171;
+    text-align:left;
+}
+.viewer .alternatingRow{
+    background:#fcfcfc
+}
+
+#Contents{
+    text-indent:50px;
 }

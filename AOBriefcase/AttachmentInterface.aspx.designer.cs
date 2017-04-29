@@ -13,13 +13,22 @@ namespace AOBriefcase {
     public partial class AttachmentInterface {
         
         /// <summary>
-        /// form1 control.
+        /// subNavi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Menu subNavi;
+        
+        /// <summary>
+        /// editHeaders control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl editHeaders;
         
         /// <summary>
         /// selectionInfo control.
@@ -112,13 +121,13 @@ namespace AOBriefcase {
         protected global::System.Web.UI.WebControls.GridView GridView1;
         
         /// <summary>
-        /// testFilepath control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label testFilepath;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
         /// SqlDataSource1 control.

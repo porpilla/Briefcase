@@ -24,6 +24,24 @@ h3{
 #editToggles{    
 }
 
+.uploader{
+    float:left;
+}
+
+.authDoc{
+    width:375px;
+    padding:5px 5px 5px 5px;
+    border:double;
+    border-radius:8px;
+}
+
+.billDoc{
+    width:375px;
+    padding:5px 5px 5px 5px;
+    border:double;
+    border-radius:8px;
+}
+
 #DBE{
     right:5px;
 }

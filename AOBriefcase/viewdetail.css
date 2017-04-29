@@ -133,11 +133,16 @@ dl dt dd{
     right: 5px;
 }
 
-#NavigationBar{
+/*#NavigationBar{
     position: relative;
     height: 60px;
     background-color: #353535;
+}*/
+
+#infoSpace{
+	position:relative;	
 }
+
 
 #Navi ul li{
     position: relative;
@@ -169,10 +174,17 @@ dl dt dd{
     margin-left:5px;
     background-color:#2b4b83;    
     z-index:1;
-    height:250px;
+    height:100%;
+/*    height:250px;*/
 }
 
-#submenu_subNavi a{
+.subMenuNavi{
+    background:white;
+    margin-left:4px;
+	width:215px;
+}
+
+.subMenuNavi a{
     color:#2b4b83;
     background:white;
     padding-right:9px;
@@ -180,16 +192,28 @@ dl dt dd{
     margin-left:5px;    
 }
 
-#submenu_subNavi a.selected {
+.subMenuNavi_Selected{
+	background:#2b4b83;
+	border:solid;
+	border-color:white;
+}
+
+.subMenuNavi_Selected a{
     color:white;
     background:#2b4b83;
     border:solid;
     font-weight:bold;            
 }
 
-#submenu_subNavi a:hover{
-    color:white;
-    background-color:#353535;
+.subMenuNavi td:hover{
+	background:#2b4b83;
+	text-decoration:underline;
+	font-weight:bold;
+}
+
+.subMenuNavi a:hover{
+	color:white;
+	background:#2b4b83;
 }
 /*#subNavi ul li{        
     position: relative;
@@ -247,8 +271,7 @@ dl dt dd{
 .viewer{
     width:80%;
     background-color:#fff;
-    margin:0 0 10px 0;
-    margin-left:100px;
+    margin:1px 0 10px 0;    
     border:solid 1px #525252;    
     border-collapse:collapse;
     text-wrap:avoid;

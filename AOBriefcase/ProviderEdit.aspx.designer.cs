@@ -13,22 +13,22 @@ namespace AOBriefcase {
     public partial class ProviderEdit {
         
         /// <summary>
-        /// form1 control.
+        /// subNavi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Menu subNavi;
         
         /// <summary>
-        /// AOLogo control.
+        /// editHeaders control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image AOLogo;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl editHeaders;
         
         /// <summary>
         /// GridView1 control.

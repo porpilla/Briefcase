@@ -17,6 +17,24 @@ p{
     font:.8em;
 }
 
+#CS{
+    font-size:1.5em;
+    color:#ffffff;
+    padding-left:5px;
+    display:block;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+}
+
+#subNavigationBar{    
+    margin-left:5px;
+    background-color:#2b4b83;
+    z-index:0;
+	height:100%;
+/*    height:250px;*/
+}
+
 input[type=text]{
     width: 300px;
     box-sizing: border-box;
@@ -135,11 +153,14 @@ input[type=text]{
     font-family:Arial, Helvetica, sans-serif;*/
 }
 
-#searchresults{    
-    position: center;    
+#searchResults{    
+    position: center;
+    z-index:2;    
 }
 
-
+#viewerNaviMenu{ /* Overrides reserved master page space for submenu to prevent blocked links*/
+    z-index:-1 !important;
+}
 
 
 

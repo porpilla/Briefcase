@@ -96,6 +96,7 @@
   <ItemGroup>
     <Content Include="Admin.aspx" />
     <Content Include="AttachmentInterface.aspx" />
+    <Content Include="AttachmentInterface.css" />
     <Content Include="BillingUserLogin.aspx" />
     <Content Include="Contacts.aspx" />
     <Content Include="Contacts.css" />

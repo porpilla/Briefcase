@@ -18,8 +18,9 @@
             Orientation="Vertical" 
             OnMenuItemClick="subNavi_MenuItemClick"
             IncludeStyleBlock="true" 
-            ItemWrap="true"
-            CssClass="submenutestcss"                
+            ItemWrap="false"
+	    CssClass="subMenuNavi"
+	    StaticSelectedStyle-CssClass="subMenuNavi_Selected"
             >
 
             <Items>
@@ -29,37 +30,44 @@
                 <asp:MenuItem Text="Business Office Details" />
             </Items>
         </asp:Menu>
+
     </div>
 </asp:Content>
 
 
 <asp:Content ID="stuff_2" ContentPlaceHolderID="MainContent" runat="server">
+	<div ID="infoSpace">
+	<div ID="debugMsgs">
+	    <asp:Label ID="viewGUID" runat="server" Visible="false"></asp:Label>
+	    <asp:Label ID="viewGUID2" runat="server" Visible="false"></asp:Label>
+	</div>
 
-    <asp:Label ID="viewGUID" runat="server" Visible="false"></asp:Label>
-    <asp:Label ID="viewGUID2" runat="server" Visible="false"></asp:Label>
-        
-        <asp:GridView 
-            ID="GridView1" 
-            runat="server" 
-            Width="100%"
-            AutoGenerateColumns="False" 
-            DataSourceID="SqlDataSource2"
-            Gridlines="None"
-            HeaderText="Credentialing Details"
-            CssClass="viewer"
-            HeaderStyle-CssClass="detailheader"
-            FieldHeaderStyle-CssClass="detailfieldheader"
-            AlternatingRowStyle-CssClass="alternatingRow"
-            >
-            <Columns>
-                <%--<asp:BoundField DataField="ProviderID" HeaderText="ProviderID" SortExpression="ProviderID" />--%>
-                <asp:BoundField DataField="Provider_FullName" HeaderText="Provider" SortExpression="Provider_FullName" ItemStyle-Width="20%"/>
-                <asp:BoundField DataField="Credentialing_Status" HeaderText="Status" SortExpression="Credentialing_Status" ItemStyle-Width="15%"/>
-                <asp:BoundField DataField="Credentialing_EffectiveDate" HeaderText="Effective Date" SortExpression="Credentialing_EffectiveDate" ItemStyle-Width="15%" />
-                <asp:BoundField DataField="Credentialing_Comment" HeaderText="Comments" SortExpression="Credentialing_Comment" ItemStyle-Width="70%"/>
-                <%--<asp:BoundField DataField="GUID" HeaderText="GUID" SortExpression="GUID" />--%>
-            </Columns>
-        </asp:GridView>
+        <div ID="infoTable">
+	        <asp:GridView 
+	            ID="GridView1" 
+	            runat="server" 
+	            Width="100%"
+	            AutoGenerateColumns="False" 
+	            DataSourceID="SqlDataSource2"
+	            Gridlines="None"
+	            HeaderText="Credentialing Details"
+	            CssClass="viewer"
+	            HeaderStyle-CssClass="detailheader"
+	            FieldHeaderStyle-CssClass="detailfieldheader"
+	            AlternatingRowStyle-CssClass="alternatingRow"
+	            >
+	            <Columns>
+	                <%--<asp:BoundField DataField="ProviderID" HeaderText="ProviderID" SortExpression="ProviderID" />--%>
+	                <asp:BoundField DataField="Provider_FullName" HeaderText="Provider" SortExpression="Provider_FullName" ItemStyle-Width="20%"/>
+	                <asp:BoundField DataField="Credentialing_Status" HeaderText="Status" SortExpression="Credentialing_Status" ItemStyle-Width="15%"/>
+	                <asp:BoundField DataField="Credentialing_EffectiveDate" HeaderText="Effective Date" SortExpression="Credentialing_EffectiveDate" ItemStyle-Width="15%" />
+	                <asp:BoundField DataField="Credentialing_Comment" HeaderText="Comments" SortExpression="Credentialing_Comment" ItemStyle-Width="70%"/>
+	                <%--<asp:BoundField DataField="GUID" HeaderText="GUID" SortExpression="GUID" />--%>
+	            </Columns>
+	        </asp:GridView>
+	</div>
+	</div>
+
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [ProviderID], [Provider_FullName], [Credentialing_Status], [Credentialing_EffectiveDate], [Credentialing_Comment], [GUID] FROM [Contract_Demographics] AS Base JOIN [ProviderContract_junction] AS Beta ON Base.[ContractID] = Beta.[ContractID] JOIN [ProviderList] AS Alpha ON [ProviderListID] = [ProviderID] WHERE [GUID] = @guid AND [Provider_Status] = 1">
             <SelectParameters>
                 <asp:QueryStringParameter Name="guid" QueryStringField="guid" />

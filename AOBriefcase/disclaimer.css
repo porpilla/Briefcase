@@ -26,7 +26,7 @@ p{
 }
 
 .FancyButtonOrange{
-    background: transparent url(/Images/buttonOrange.png) no-repeat scroll top right;
+    background: transparent url(Images/buttonOrange.png) no-repeat scroll top right;
     display: block;
     float:right;
     height:28px;
@@ -43,7 +43,7 @@ p{
     height:25px;*/
 }
 .FancyButtonBlue{
-    background:transparent url(/Images/buttonBlue.png) no-repeat scroll top right;
+    background:transparent url(Images/buttonBlue.png) no-repeat scroll top right;
     display:block;
     float:right;
     height:28px;
