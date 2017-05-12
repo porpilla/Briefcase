@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
 
 namespace AOBriefcase
 {
@@ -11,7 +14,21 @@ namespace AOBriefcase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    //StatusText.Text = string.Format("Hello {0}!!", HttpContext.Current.User.Identity.GetUserName());
+                    btn_LogOut.Visible = true;
+                    btn_SignIn.Visible = false;
+                }
+                else
+                {
+                    LoginForm.Visible = true;
+                    btn_SignIn.Visible = true;
+                    btn_LogOut.Visible = false;
+                }
+            }
         }
 
         protected void btnSub1_Click()
@@ -57,6 +74,28 @@ namespace AOBriefcase
             {
                 btnSub4_Click();
             }
+        }
+
+        protected void SignIn(object sender, EventArgs e)
+        {
+            var userStore = new UserStore<IdentityUser>();
+            var userManager = new UserManager<IdentityUser>(userStore);            
+            var user = userManager.Find(fieldUserName.Text, fieldPassword.Text);
+
+            if (user != null)
+            {
+                var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+                var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+
+                authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, userIdentity);
+                Response.Redirect(Page.Request.RawUrl,false);
+            }
+        }
+        protected void SignOut(object sender, EventArgs e)
+        {
+            var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+            authenticationManager.SignOut();
+            Response.Redirect("~/Disclaimer.aspx");
         }
     }
 }

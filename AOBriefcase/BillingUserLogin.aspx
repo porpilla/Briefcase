@@ -4,37 +4,45 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Billing User Portal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" type="image/x-icon" href="~/Images/favicon.ico" runat="server"/>
-    <link rel="icon" type="image/ico" href="~/Images/favicon.ico" runat="server"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="WebForm1.css" type="text/css"/>
+   <title></title>
 </head>
-<body>
-    <form id="form1" runat="server">
-
-        <asp:Image ID="AOLogo" runat="server" ImageUrl="~/Images/AOlogo.png" />
-
-        <div id="NavigationBar">
-            <h2 id="CRD"><span style="color:#79b9ef">C</span>ontract <span style="color:#79b9ef">R</span>eference <span style="color:#79b9ef">D</span>atabase</h2>      
-            <asp:Menu ID="Navi" runat="server" EnableViewState="false" Orientation="Horizontal">
-                <Items>
-                    <asp:MenuItem NavigateUrl="~/disclaimer.aspx" Text="Home" />                    
-                    <asp:MenuItem NavigateUrl="~/WebForm1.aspx" Text="Search for a Contract" />
-                    <asp:MenuItem NavigateUrl="~/DBEdit.aspx" Text="Edit Contracts" />
-                    <asp:MenuItem NavigateUrl="~/Contacts.aspx" Text="Contact Page" />
-                </Items>
-            </asp:Menu>
-        </div>
-
-        <asp:Login 
-            ID="Login1" 
-            runat="server" 
-            OnAuthenticate ="ValidateUser">
-        </asp:Login>
-        <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
-
-    </form>
+<body style="font-family: Arial, Helvetica, sans-serif; font-size: small">
+   <form id="form1" runat="server">
+      <div>
+         <h4 style="font-size: medium">Log In</h4>
+         <hr />
+         <asp:PlaceHolder runat="server" ID="LoginStatus" Visible="false">
+            <p>
+               <asp:Literal runat="server" ID="StatusText" />
+            </p>
+         </asp:PlaceHolder>
+         <asp:PlaceHolder runat="server" ID="LoginForm" Visible="false">
+            <div style="margin-bottom: 10px">
+               <asp:Label runat="server" AssociatedControlID="UserName">User name</asp:Label>
+               <div>
+                  <asp:TextBox runat="server" ID="UserName" />
+               </div>
+            </div>
+            <div style="margin-bottom: 10px">
+               <asp:Label runat="server" AssociatedControlID="Password">Password</asp:Label>
+               <div>
+                  <asp:TextBox runat="server" ID="Password" TextMode="Password" />
+               </div>
+            </div>
+            <div style="margin-bottom: 10px">
+               <div>
+                  <asp:Button runat="server" OnClick="SignIn" Text="Log in" />
+               </div>
+            </div>
+         </asp:PlaceHolder>
+         <asp:PlaceHolder runat="server" ID="LogoutButton" Visible="false">
+            <div>
+               <div>
+                  <asp:Button runat="server" OnClick="SignOut" Text="Log out" />
+               </div>
+            </div>
+         </asp:PlaceHolder>
+      </div>
+   </form>
 </body>
 </html>

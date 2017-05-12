@@ -23,7 +23,7 @@
     <div id="results">
         <div id="search">
             <i class="glyphicon glyphicon-search" id="searchIcon"></i>      
-            <asp:TextBox ID="txtName" runat="server" placeholder="Search..." />
+            <asp:TextBox ID="txtName" runat="server" placeholder="Search..." Type="Search"/>
             <asp:Button CssClass="btn1" runat="server" OnClick="btnSearch_Click" Text="Search" ValidationGroup="Search"/>            
             <asp:Button CssClass="btn1" runat="server" OnClick="btnViewall_Click" Text="View All" ValidationGroup="OmniView"/>            
         </div>

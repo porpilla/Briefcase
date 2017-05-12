@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="AOBriefcase.Site1" %>
+﻿<%@ Master Language="C#" AutoEventWireup="True" CodeBehind="Site1.master.cs" Inherits="AOBriefcase.Site1" %>
 
 <!DOCTYPE html>
 
@@ -20,15 +20,44 @@
             <div id="UserInfo">
                 <asp:LoginView ID="LoginView1" runat="server">
                     <AnonymousTemplate>
-                        AO User
+                        Business Office User Sign In
                     </AnonymousTemplate>
                     <LoggedInTemplate>
-                        AO Admin
+                        DebugMsg: Role group error.
                     </LoggedInTemplate>
-                </asp:LoginView>
+                    <RoleGroups>
+                        <asp:RoleGroup Roles="Admin">
+                            <ContentTemplate>
+                                Logged in as Admin:
+                            </ContentTemplate>
+                        </asp:RoleGroup>
 
-                <asp:LoginName ID="LoginName2" runat="server" Font-Bold="true" />
-                <asp:LoginStatus ID="LoginStatus2" runat="server" />
+                        <asp:RoleGroup Roles="BillingUser">
+                            <ContentTemplate>
+                                Logged in as BillingUser:
+                            </ContentTemplate>
+                        </asp:RoleGroup>
+                    </RoleGroups>
+                </asp:LoginView>
+                
+                <div id="LoginForm" runat="server" visible="false">
+                    <div id="inputUserName">
+                        <asp:Label runat="server" AssociatedControlID="FieldUserName">User name</asp:Label>
+                        <asp:TextBox runat="server" ID="fieldUserName" />
+                    </div>
+
+                    <div id="inputPassword">
+                        <asp:Label runat="server" AssociatedControlID="FieldPassword">Password</asp:Label>
+                        <asp:TextBox runat="server" ID="fieldPassword" TextMode="Password" />
+                    </div>
+                </div>
+
+                <asp:LoginName ID="LoginName2" runat="server" Font-Bold="true" />                
+                <%--<asp:Literal runat="server" ID="StatusText" />--%>
+                <div id="AccountButtons">
+                    <asp:Button runat="server" OnClick="SignIn" Text="Sign In" ID="btn_SignIn"/>
+                    <asp:Button runat="server" OnClick="SignOut" Text="Log Out" ID="btn_LogOut"/>
+                </div>
             </div>
 
             <div id="NavigationBar" class="NavigationBar">
@@ -36,7 +65,7 @@
                 <div id="NavigationBarButtons" runat="server">
                     <a runat="server" href="~/disclaimer.aspx">Home</a>
                     <a runat="server" href="~/WebForm1.aspx">Search for a Contract</a>
-                    <a runat="server" href="~/DBEdit.aspx">Edit Contracts</a>
+                    <a runat="server" href="~/AdminOnly/DBEdit.aspx">Edit Contracts</a>
                     <a runat="server" href="~/Contacts.aspx">Contact</a>
                 </div>
 

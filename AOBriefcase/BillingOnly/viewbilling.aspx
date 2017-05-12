@@ -15,7 +15,7 @@
     <form id="form1" runat="server">
     <asp:Image ID="AOLogo" runat="server" ImageURL="~/Images/AOlogo.png"/>        
         <h2>Contract Billing/Collections Details</h2>
-        <a href="WebForm1.aspx">Back to search page</a>
+        <a href="~/WebForm1.aspx">Back to search page</a>
         <br />
 
         <asp:LoginView ID="LoginView1" runat="server">

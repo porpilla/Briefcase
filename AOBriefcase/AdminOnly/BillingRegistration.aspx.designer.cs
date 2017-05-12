@@ -10,7 +10,7 @@
 namespace AOBriefcase {
     
     
-    public partial class BillingUserLogin {
+    public partial class BillingRegistration {
         
         /// <summary>
         /// form1 control.
@@ -22,31 +22,22 @@ namespace AOBriefcase {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// LoginStatus control.
+        /// StatusMessage1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder LoginStatus;
+        protected global::System.Web.UI.WebControls.Literal StatusMessage1;
         
         /// <summary>
-        /// StatusText control.
+        /// StatusMessage2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal StatusText;
-        
-        /// <summary>
-        /// LoginForm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder LoginForm;
+        protected global::System.Web.UI.WebControls.Literal StatusMessage2;
         
         /// <summary>
         /// UserName control.
@@ -67,12 +58,21 @@ namespace AOBriefcase {
         protected global::System.Web.UI.WebControls.TextBox Password;
         
         /// <summary>
-        /// LogoutButton control.
+        /// ConfirmPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder LogoutButton;
+        protected global::System.Web.UI.WebControls.TextBox ConfirmPassword;
+        
+        /// <summary>
+        /// SelectedRole control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList SelectedRole;
     }
 }

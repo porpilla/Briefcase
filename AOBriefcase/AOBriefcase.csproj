@@ -43,6 +43,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.7\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -71,11 +79,51 @@
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -95,13 +143,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin.aspx" />
-    <Content Include="AttachmentInterface.aspx" />
-    <Content Include="AttachmentInterface.css" />
+    <Content Include="AdminOnly\AttachmentInterface.aspx" />
+    <Content Include="AdminOnly\AttachmentInterface.css" />
+    <Content Include="AdminOnly\BillingRegistration.aspx" />
     <Content Include="BillingUserLogin.aspx" />
     <Content Include="Contacts.aspx" />
     <Content Include="Contacts.css" />
-    <Content Include="DBEdit.aspx" />
-    <Content Include="DBEdit.css" />
+    <Content Include="AdminOnly\DBEdit.aspx" />
+    <Content Include="AdminOnly\DBEdit.css" />
     <Content Include="disclaimer.aspx" />
     <Content Include="disclaimer.css" />
     <Content Include="downloads.aspx" />
@@ -113,13 +162,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="PathResolution.aspx" />
-    <Content Include="ProviderEdit.aspx" />
-    <Content Include="ProviderEdit.css" />
+    <Content Include="AdminOnly\ProviderEdit.aspx" />
+    <Content Include="AdminOnly\ProviderEdit.css" />
     <Content Include="Site1.css" />
     <Content Include="viewauthreq.css" />
     <Content Include="BillingOnly\viewbilling.aspx" />
     <Content Include="viewcredentialing.css" />
     <Content Include="WebForm1.css" />
+    <Content Include="BillingOnly\Web.config" />
+    <Content Include="AdminOnly\Web.config" />
     <None Include="Properties\PublishProfiles\Beta.pubxml" />
     <Content Include="Site1.Master" />
     <None Include="Web.Debug.config">
@@ -152,12 +203,19 @@
     <Compile Include="Admin.aspx.designer.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AttachmentInterface.aspx.cs">
+    <Compile Include="AdminOnly\AttachmentInterface.aspx.cs">
       <DependentUpon>AttachmentInterface.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AttachmentInterface.aspx.designer.cs">
+    <Compile Include="AdminOnly\AttachmentInterface.aspx.designer.cs">
       <DependentUpon>AttachmentInterface.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminOnly\BillingRegistration.aspx.cs">
+      <DependentUpon>BillingRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminOnly\BillingRegistration.aspx.designer.cs">
+      <DependentUpon>BillingRegistration.aspx</DependentUpon>
     </Compile>
     <Compile Include="BillingUserLogin.aspx.cs">
       <DependentUpon>BillingUserLogin.aspx</DependentUpon>
@@ -174,11 +232,11 @@
       <DependentUpon>Contacts.aspx</DependentUpon>
     </Compile>
     <Compile Include="ContractDirectory.cs" />
-    <Compile Include="DBEdit.aspx.cs">
+    <Compile Include="AdminOnly\DBEdit.aspx.cs">
       <DependentUpon>DBEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DBEdit.aspx.designer.cs">
+    <Compile Include="AdminOnly\DBEdit.aspx.designer.cs">
       <DependentUpon>DBEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="disclaimer.aspx.cs">
@@ -210,11 +268,11 @@
       <DependentUpon>PlaceholderPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProviderEdit.aspx.cs">
+    <Compile Include="AdminOnly\ProviderEdit.aspx.cs">
       <DependentUpon>ProviderEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ProviderEdit.aspx.designer.cs">
+    <Compile Include="AdminOnly\ProviderEdit.aspx.designer.cs">
       <DependentUpon>ProviderEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site1.Master.cs">
@@ -224,6 +282,7 @@
     <Compile Include="Site1.Master.designer.cs">
       <DependentUpon>Site1.Master</DependentUpon>
     </Compile>
+    <Compile Include="Startup.cs" />
     <Compile Include="viewauthreq.aspx.cs">
       <DependentUpon>viewauthreq.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -263,6 +322,7 @@
   <ItemGroup>
     <Folder Include="App_Data\Attachments\Authorizations\" />
     <Folder Include="App_Data\Attachments\Billing\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

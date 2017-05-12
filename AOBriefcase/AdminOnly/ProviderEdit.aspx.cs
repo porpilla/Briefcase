@@ -25,19 +25,19 @@ namespace AOBriefcase
 
         protected void btnSub1_Click()
         {
-            Response.Redirect("~/DBEdit.aspx");
+            Response.Redirect("~/AdminOnly/DBEdit.aspx");
         }
         protected void btnSub2_Click()
         {
-            Response.Redirect("~/ProviderEdit.aspx");
+            Response.Redirect("~/AdminOnly/ProviderEdit.aspx");
         }
         protected void btnSub3_Click()
         {
-            Response.Redirect("~/UserRegistry.aspx");
+            Response.Redirect("~/AdminOnly/BillingRegistration.aspx");
         }
         protected void btnSub4_Click()
         {
-            Response.Redirect("~/AttachmentInterface.aspx");
+            Response.Redirect("~/AdminOnly/AttachmentInterface.aspx");
         }
 
         protected void subNavi_MenuItem_Click(object sender, MenuEventArgs e)

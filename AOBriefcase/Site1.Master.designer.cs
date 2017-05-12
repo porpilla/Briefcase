@@ -49,6 +49,33 @@ namespace AOBriefcase {
         protected global::System.Web.UI.WebControls.LoginView LoginView1;
         
         /// <summary>
+        /// LoginForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LoginForm;
+        
+        /// <summary>
+        /// fieldUserName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox fieldUserName;
+        
+        /// <summary>
+        /// fieldPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox fieldPassword;
+        
+        /// <summary>
         /// LoginName2 control.
         /// </summary>
         /// <remarks>
@@ -58,13 +85,22 @@ namespace AOBriefcase {
         protected global::System.Web.UI.WebControls.LoginName LoginName2;
         
         /// <summary>
-        /// LoginStatus2 control.
+        /// btn_SignIn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LoginStatus LoginStatus2;
+        protected global::System.Web.UI.WebControls.Button btn_SignIn;
+        
+        /// <summary>
+        /// btn_LogOut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_LogOut;
         
         /// <summary>
         /// NavigationBarButtons control.

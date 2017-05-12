@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
+using System;
 using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Web.Security;
 
 namespace AOBriefcase
 {
@@ -15,45 +11,47 @@ namespace AOBriefcase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-        }
-
-        protected void ValidateUser(object sender, EventArgs e)
-        {
-            int userId = 0;
-            string constr = ConfigurationManager.ConnectionStrings["DemographicsConnectionString"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
+            if (!IsPostBack)
             {
-                using (SqlCommand cmd = new SqlCommand("Validate_Billing"))
+                if (User.Identity.IsAuthenticated)
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Username", Login1.UserName);
-                    cmd.Parameters.AddWithValue("@Password", Login1.Password);
-                    cmd.Connection = con;
-                    con.Open();
-                    userId = Convert.ToInt32(cmd.ExecuteScalar());
-                    con.Close();
+                    StatusText.Text = string.Format("Hello {0}!!", User.Identity.GetUserName());
+                    LoginStatus.Visible = true;
+                    LogoutButton.Visible = true;
                 }
-                switch (userId)
+                else
                 {
-                    case -1:
-                        Login1.FailureText = "Username and/or password is incorrect.";
-                        break;
-                    case -2:
-                        Login1.FailureText = "Exception catch - authentication issue.";
-                        break;
-                    // Use additional cases to debug login issues
-                    //  case 1:
-                    //      Login1.FailureText = "userId returned 1";
-                    //      break;
-                    //  case 0:
-                    //      Login1.FailureText = "userId returned 0";
-                    //      break;
-                    default:
-                        FormsAuthentication.RedirectFromLoginPage(Login1.UserName, Login1.RememberMeSet);
-                        break;
+                    LoginForm.Visible = true;
                 }
             }
+        }
+
+        protected void SignIn(object sender, EventArgs e)
+        {
+            var userStore = new UserStore<IdentityUser>();
+            var userManager = new UserManager<IdentityUser>(userStore);
+            var user = userManager.Find(UserName.Text, Password.Text);
+
+            if (user != null)
+            {
+                var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+                var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+
+                authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, userIdentity);
+                Response.Redirect("~/BillingUserLogin.aspx");
+            }
+            else
+            {
+                StatusText.Text = "Invalid username or password.";
+                LoginStatus.Visible = true;
+            }
+        }
+
+        protected void SignOut(object sender, EventArgs e)
+        {
+            var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+            authenticationManager.SignOut();
+            Response.Redirect("~/Login.aspx");
         }
     }
 }

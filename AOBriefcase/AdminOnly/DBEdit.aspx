@@ -27,7 +27,7 @@
             <Items>
                 <asp:MenuItem Text="Configure Contracts" Selected="true" />
                 <asp:MenuItem Text="Configure Providers" />
-                <asp:MenuItem Text="Configure Billing Users" Selectable="false" Tooltip="Feature is not yet implemented"/>
+                <asp:MenuItem Text="Configure Billing Users" Selectable="true" Tooltip="Feature is under construction"/>
                 <asp:MenuItem Text="Configure Attachments" />
             </Items>
 
